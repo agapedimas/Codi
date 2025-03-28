@@ -1,1 +1,62 @@
 @import "https://assets.agapedimas.com/ui/v3/style.css";
+
+header.titlebar .controls .content
+{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content auto max-content;
+    gap: 20px;
+
+    .navigation
+    {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 15px;
+
+        button
+        {
+            padding: 0;
+            min-width: unset;
+            height: 30px;
+            font-weight: bold;
+        }
+    }
+
+    input[type=search]
+    {
+        border: 0;
+        text-align: center;
+        height: 30px;
+        font-size: 0.9em;
+    }
+
+    .accessibility
+    {
+        button
+        {
+            font-size: 0.9em;
+            height: 30px;
+        }
+    }
+
+    .profile
+    {   
+        display: grid;
+        
+        img
+        {
+            height: 30px;
+            aspect-ratio: 1;
+            border-radius: 100%;
+            transition: 0.15s opacity;
+        }
+        img:hover
+        {
+            opacity: 0.85;
+        }
+        img:active
+        {
+            opacity: 0.7;
+        }
+    }
+}

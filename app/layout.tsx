@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Navigation from "./navigation";
 import Titlebar from "./titlebar";
 import "./globals.css";
+import Controls from "./controls";
+import Script from "next/script";
 
 export const metadata: Metadata = 
 {
@@ -11,6 +13,10 @@ export const metadata: Metadata =
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) 
 {
+	/*
+		Agar development UI lebih cepat, maka menggunakan template dari assets.agapedimas.com
+		dan plugin tersebut membutuhkan JQuery
+	*/
 	return (
 		<html lang="en" suppressHydrationWarning={true}>
 			<head>
@@ -24,10 +30,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 				<script src="https://assets.agapedimas.com/ui/v3/main.js"></script>
 				<Titlebar/>
 				<div className="root">
+					<Controls/>
 					<Navigation/>
 					<div className="main">
 						{children}
 					</div>
+					<Script src="scripts.js"></Script>
 				</div>
 			</body>
 		</html>
