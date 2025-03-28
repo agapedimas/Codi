@@ -1,5 +1,7 @@
+const element = (
+	"Hello World!"
+);
+
 export default function Home() {
-	return (
-		"Hello World!"
-	);
+	return element;
 }

@@ -1,3 +1,9 @@
+'use client'
+import { usePathname } from "next/navigation";
+import Menu_Courses from "./courses/navigation";
+import Menu_Certificates from "./certificates/navigation";
+import Menu_CodeEditor from "./code-editor/navigation";
+
 /*
     Ada 2 versi navigasi 
     Desktop : Navigasi berada di sebelah kiri layar
@@ -7,41 +13,60 @@
     maka ada beberapa yang perlu diberi attribute ad-abortstyle=true dan suppressHydrationWarning
 */
 
-const element = (
-    <nav>
-        <section className="desktop">
-            <div className="navigation">
-                <a ad-goto="/courses" suppressHydrationWarning>
-                    <span className="icon">&#xed7e;</span>
-                    <span>Courses</span>
-                </a>
-                <a ad-goto="/certificates" suppressHydrationWarning>
-                    <span className="icon">&#xf684;</span>
-                    <span>Certificates</span>
-                </a>
-                <a ad-goto="/code-editor" suppressHydrationWarning>
-                    <span className="icon">&#xef4f;</span>
-                    <span>Code Editor</span>
-                </a>
-            </div>
-        </section>
-        <section className="mobile">
-            <div className="navigation">
-                <a ad-goto="/courses" suppressHydrationWarning>
-                    <span className="icon">&#xed7b;</span>
-                    <span>Courses</span>
-                </a>
-                <a ad-goto="/certificates" suppressHydrationWarning>
-                    <span className="icon">&#xf683;</span>
-                    <span>Certificates</span>
-                </a>
-                <a ad-goto="/code-editor" suppressHydrationWarning>
-                    <span className="icon">&#xef4f;</span>
-                    <span>Code Editor</span>
-                </a>
-            </div>
-        </section>
-    </nav>   
-);
+export default function Navigation() 
+{ 
+    let path = usePathname();
+    let menus;
+    
+    switch (path)
+    {
+        case "/courses":
+            menus = <Menu_Courses/>;
+            break;
+        case "/certificates":
+            menus = <Menu_Certificates/>;
+            break;
+        case "/code-editor":
+            menus = <Menu_CodeEditor/>;
+            break;
 
-export default function Navigation() { return element }
+    };
+
+    return (
+        <nav>
+            <section className="desktop">
+                <div className="navigation">
+                    <a ad-goto="/courses" suppressHydrationWarning>
+                        <span className="icon">&#xed7e;</span>
+                        <span>Courses</span>
+                    </a>
+                    <a ad-goto="/certificates" suppressHydrationWarning>
+                        <span className="icon">&#xf684;</span>
+                        <span>Certificates</span>
+                    </a>
+                    <a ad-goto="/code-editor" suppressHydrationWarning>
+                        <span className="icon">&#xef4f;</span>
+                        <span>Code Editor</span>
+                    </a>
+                    { menus }
+                </div>
+            </section>
+            <section className="mobile">
+                <div className="navigation">
+                    <a ad-goto="/courses" suppressHydrationWarning>
+                        <span className="icon">&#xed7b;</span>
+                        <span>Courses</span>
+                    </a>
+                    <a ad-goto="/certificates" suppressHydrationWarning>
+                        <span className="icon">&#xf683;</span>
+                        <span>Certificates</span>
+                    </a>
+                    <a ad-goto="/code-editor" suppressHydrationWarning>
+                        <span className="icon">&#xef4f;</span>
+                        <span>Code Editor</span>
+                    </a>
+                </div>
+            </section>
+        </nav>   
+    ); 
+}
