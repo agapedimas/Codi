@@ -60,3 +60,48 @@ header.titlebar .controls .content
         }
     }
 }
+
+.root nav
+{
+    a.dropdown
+    {
+        position: relative;
+        grid-auto-columns: auto;
+
+        span
+        {
+            position: relative;
+            margin-left: 1.25em;
+        }
+    }
+
+    a.dropdown::before
+    {
+        content: "\ef4a";
+        position: absolute;
+        top: 50%;
+        left: 1.25em;
+        transform: translate(0, -50%) rotate(0deg);
+        font-family: var(--font-icon);
+        font-weight: bold;
+        font-size: 0.6em;
+        color: var(--foreground-description);
+    }
+
+    a.dropdown.expanded::before
+    {
+        transform: translate(0, -50%) rotate(90deg);
+    }
+
+    a.innerdropdown
+    {
+        position: relative;
+        grid-auto-columns: auto;
+
+        span
+        {
+            position: relative;
+            margin-left: 1.25em;
+        }
+    }
+}

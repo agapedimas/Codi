@@ -18,19 +18,12 @@ export default function Navigation()
     let path = usePathname();
     let menus;
     
-    switch (path)
-    {
-        case "/courses":
-            menus = <Menu_Courses/>;
-            break;
-        case "/certificates":
-            menus = <Menu_Certificates/>;
-            break;
-        case "/code-editor":
-            menus = <Menu_CodeEditor/>;
-            break;
-
-    };
+    if (path.startsWith("/courses"))
+        menus = <Menu_Courses/>;
+    if (path.startsWith("/certificates"))
+        menus = <Menu_Certificates/>;
+    if (path.startsWith("/code-editor"))
+        menus = <Menu_CodeEditor/>;
 
     return (
         <nav>
