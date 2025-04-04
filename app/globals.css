@@ -1,4 +1,5 @@
 @import "https://assets.agapedimas.com/ui/v3/style.css";
+@import "./code.css";
 
 header.titlebar .controls .content
 {
@@ -102,6 +103,118 @@ header.titlebar .controls .content
         {
             position: relative;
             margin-left: 1.25em;
+        }
+    }
+}
+
+.root .main
+{
+    article
+    {
+        max-width: 800px;
+        font-size: 1.2rem;
+        line-height: 1.35;
+        
+        h1 { font-size: 2.5rem }
+        h2 { font-size: 1.75rem }
+        h3 { font-size: 1.5rem }
+        h4, h5, h6 { font-size: 1.25rem }
+
+        :where(h1, h2, h3, h4, h5, h6):not(:first-child)
+        {
+            margin: 0.5rem 0;
+        }
+        p ~:where(h1, h2, h3, h4, h5, h6) 
+        {
+            margin-top: 2.5rem !important;
+        }
+
+        img
+        {
+            max-width: 100%;
+        }
+
+        :not(pre) code
+        {
+            margin: 0 0.25ch;
+            color: var(--accent-access);
+        }
+
+        pre
+        {    
+            overflow: hidden;
+            border-radius: 15px;
+            
+            code
+            {
+                display: block;
+                font-size: 1rem;
+                background: #262626;
+                padding: 12px 15px;    
+                overflow: auto;
+                color: white;
+            }
+            *
+            {
+                user-select: text;
+            }
+        }
+
+        pre::before
+        {
+            content: attr(data-filename);
+            display: block;
+            background: #3b3838;
+            font-family: var(--font-semibold);
+            font-size: 0.9rem;
+            padding: 10px 15px;
+            color: white;
+        }
+
+        b, strong
+        {
+            font-family: var(--font-bold);
+        }
+    }
+}
+
+#PopOver_Profile
+{
+    .profile
+    {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: max-content auto;
+        gap: 15px;
+
+        img
+        {
+            width: 50px;
+            aspect-ratio: 1;
+        }
+
+        .info
+        {
+            display: grid;
+            grid-auto-rows: max-content;
+            align-content: center;
+            margin-bottom: 2em;
+
+            .name
+            {
+                font-size: 1.2em;
+                font-family: var(--font-bold);
+            }
+            .description
+            {
+                font-size: 1.1em;
+                font-family: var(--font-semibold);
+                color: var(--foreground-description);
+            }
+            button
+            {
+                margin-top: 0.5em;
+            }
         }
     }
 }

@@ -35,7 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 					<div className="main">
 						{children}
 					</div>
-					<Script src="scripts.js"></Script>
+					<Script src="/scripts.js"></Script>
 				</div>
 			</body>
 		</html>

@@ -1,5 +1,5 @@
 const element = (
-    <header className="titlebar">
+    <header className="titlebar" suppressHydrationWarning>
         <img className="icon" src="/favicon.ico"/>
         <span className="name">Codi</span>
         <div className="controls">
