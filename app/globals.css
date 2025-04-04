@@ -105,6 +105,58 @@ header.titlebar .controls .content
             margin-left: 1.25em;
         }
     }
+
+    a.innerdropdown.dropdown
+    {
+        span
+        {
+            margin-left: calc(2 * 1.25em);
+        }
+    }
+    a.innerdropdown.dropdown::before
+    {
+        left: calc(2 * 1.25em + 1em);
+    }
+
+    a.file
+    {
+        position: relative;
+        grid-auto-columns: auto;
+
+        span
+        {
+            position: relative;
+            margin-left: calc(2 * 1.25em);
+        }
+    }
+
+    a.file::before
+    {
+        display: grid;
+        width: 15px;
+        border-radius: 100%;
+        color: white;
+        aspect-ratio: 1;
+        position: absolute;
+        top: 50%;
+        left: calc(2 * 10px + 10px);
+        transform: translate(0, -50%) rotate(0);
+        font-family: var(--font-bold);
+        font-size: 11px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    a.file[data-ext="java"]::before
+    {
+        content: "J";
+        background: #af0000;
+    }
+    a.file[data-ext="xml"]::before
+    {
+        content: "X";
+        background: #a4a400;
+    }
 }
 
 .root .main
@@ -214,6 +266,25 @@ header.titlebar .controls .content
             button
             {
                 margin-top: 0.5em;
+            }
+        }
+    }
+}
+
+.root .main:has(.editor)
+{
+    padding: 0;
+
+    .editor
+    {
+        display: grid;
+        height: 100%;
+
+        .code
+        {
+            .cm-editor
+            {
+                height: 100%;
             }
         }
     }

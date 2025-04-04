@@ -17,7 +17,7 @@ const element = (
                 <div className="stack">
                     <span>Appearance</span>
                     <select className="plain">
-                        <option>System Default</option>
+                        <option>System Default</option> 
                         <option>Light</option>
                         <option>Dark</option>
                     </select>
