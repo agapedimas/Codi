@@ -1,0 +1,267 @@
+@import "https://assets.agapedimas.com/ui/v3/style.css";
+@import "tailwindcss";
+@import "./code.css";
+
+html {
+	scroll-behavior: smooth;
+	overflow-y: scroll;
+}
+
+body {
+	overflow-y: visible !important;
+	height: auto !important;
+}
+
+/* Titlebar controls */
+header.titlebar .controls .content {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: max-content auto max-content;
+	gap: 20px;
+}
+
+header.titlebar .controls .content .navigation {
+	display: grid;
+	grid-auto-flow: column;
+	gap: 15px;
+}
+
+header.titlebar .controls .content .navigation button {
+	padding: 0;
+	min-width: unset;
+	height: 30px;
+	font-weight: bold;
+}
+
+header.titlebar .controls .content input[type="search"] {
+	border: 0;
+	text-align: center;
+	height: 30px;
+	font-size: 0.9em;
+}
+
+header.titlebar .controls .content .accessibility button {
+	font-size: 0.9em;
+	height: 30px;
+}
+
+header.titlebar .controls .content .profile {
+	display: grid;
+}
+
+header.titlebar .controls .content .profile img {
+	height: 30px;
+	aspect-ratio: 1;
+	border-radius: 100%;
+	transition: 0.15s opacity;
+}
+
+header.titlebar .controls .content .profile img:hover {
+	opacity: 0.85;
+}
+
+header.titlebar .controls .content .profile img:active {
+	opacity: 0.7;
+}
+
+/* Navigation */
+.root nav a.dropdown {
+	position: relative;
+	grid-auto-columns: auto;
+}
+
+.root nav a.dropdown span {
+	position: relative;
+	margin-left: 1.25em;
+}
+
+.root nav a.dropdown::before {
+	content: "\ef4a";
+	position: absolute;
+	top: 50%;
+	left: 1.25em;
+	transform: translate(0, -50%) rotate(0deg);
+	font-family: var(--font-icon);
+	font-weight: bold;
+	font-size: 0.6em;
+	color: var(--foreground-description);
+}
+
+.root nav a.dropdown.expanded::before {
+	transform: translate(0, -50%) rotate(90deg);
+}
+
+.root nav a.innerdropdown {
+	position: relative;
+	grid-auto-columns: auto;
+}
+
+.root nav a.innerdropdown span {
+	position: relative;
+	margin-left: 1.25em;
+}
+
+.root nav a.innerdropdown.dropdown span {
+	margin-left: calc(2 * 1.25em);
+}
+
+.root nav a.innerdropdown.dropdown::before {
+	left: calc(2 * 1.25em + 1em);
+}
+
+.root nav a.file {
+	position: relative;
+	grid-auto-columns: auto;
+}
+
+.root nav a.file span {
+	position: relative;
+	margin-left: calc(2 * 1.25em);
+}
+
+.root nav a.file::before {
+	display: grid;
+	width: 15px;
+	border-radius: 100%;
+	color: white;
+	aspect-ratio: 1;
+	position: absolute;
+	top: 50%;
+	left: calc(2 * 10px + 10px);
+	transform: translate(0, -50%) rotate(0);
+	font-family: var(--font-bold);
+	font-size: 11px;
+	align-items: center;
+	justify-content: center;
+}
+
+.root nav a.file[data-ext="java"]::before {
+	content: "J";
+	background: #af0000;
+}
+
+.root nav a.file[data-ext="xml"]::before {
+	content: "X";
+	background: #a4a400;
+}
+
+/* Main Content */
+.root .main article {
+	max-width: 800px;
+	font-size: 1.2rem;
+	line-height: 1.35;
+}
+
+.root .main article h1 {
+	font-size: 2.5rem;
+}
+.root .main article h2 {
+	font-size: 1.75rem;
+}
+.root .main article h3 {
+	font-size: 1.5rem;
+}
+.root .main article h4,
+.root .main article h5,
+.root .main article h6 {
+	font-size: 1.25rem;
+}
+
+.root .main article :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+	margin: 0.5rem 0;
+}
+
+.root .main article p ~ :where(h1, h2, h3, h4, h5, h6) {
+	margin-top: 2.5rem !important;
+}
+
+.root .main article img {
+	max-width: 100%;
+}
+
+.root .main article :not(pre) code {
+	margin: 0 0.25ch;
+	color: var(--accent-access);
+}
+
+.root .main article pre {
+	overflow: hidden;
+	border-radius: 15px;
+}
+
+.root .main article pre code {
+	display: block;
+	font-size: 1rem;
+	background: #262626;
+	padding: 12px 15px;
+	overflow: auto;
+	color: white;
+}
+
+.root .main article pre * {
+	user-select: text;
+}
+
+.root .main article pre::before {
+	content: attr(data-filename);
+	display: block;
+	background: #3b3838;
+	font-family: var(--font-semibold);
+	font-size: 0.9rem;
+	padding: 10px 15px;
+	color: white;
+}
+
+.root .main article b,
+.root .main article strong {
+	font-family: var(--font-bold);
+}
+
+/* PopOver Profile */
+#PopOver_Profile .profile {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: max-content auto;
+	gap: 15px;
+}
+
+#PopOver_Profile .profile img {
+	width: 50px;
+	aspect-ratio: 1;
+}
+
+#PopOver_Profile .profile .info {
+	display: grid;
+	grid-auto-rows: max-content;
+	align-content: center;
+	margin-bottom: 2em;
+}
+
+#PopOver_Profile .profile .info .name {
+	font-size: 1.2em;
+	font-family: var(--font-bold);
+}
+
+#PopOver_Profile .profile .info .description {
+	font-size: 1.1em;
+	font-family: var(--font-semibold);
+	color: var(--foreground-description);
+}
+
+#PopOver_Profile .profile .info button {
+	margin-top: 0.5em;
+}
+
+/* Editor */
+.root .main:has(.editor) {
+	padding: 0;
+}
+
+.root .main .editor {
+	display: grid;
+	height: 100%;
+}
+
+.root .main .editor .code .cm-editor {
+	height: 100%;
+}

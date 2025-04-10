@@ -1,8 +1,8 @@
 'use client'
 import { usePathname } from "next/navigation";
-import Menu_Courses from "./courses/navigation";
-import Menu_Certificates from "./certificates/navigation";
-import Menu_CodeEditor from "./code-editor/navigation";
+import Menu_Courses from "../courses/navigation";
+import Menu_Certificates from "../certificates/navigation";
+import Menu_CodeEditor from "../code-editor/navigation";
 
 /*
     Ada 2 versi navigasi 
@@ -15,7 +15,7 @@ import Menu_CodeEditor from "./code-editor/navigation";
 
 export default function Navigation() 
 { 
-    let path = usePathname();
+    const path = usePathname();
     let menus;
     
     if (path.startsWith("/courses"))
