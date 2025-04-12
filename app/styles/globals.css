@@ -1,4 +1,4 @@
-/* @import "https://assets.agapedimas.com/ui/v3/style.css"; */
+@import "https://assets.agapedimas.com/ui/v3/style.css";
 @import "tailwindcss";
 @import "./code.css";
 
@@ -11,10 +11,6 @@ body {
 	overflow-y: visible !important;
 	height: auto !important;
 }
-
-/* :root {
-	--foreground-page: white;
-  } */
 
 /* Titlebar controls */
 header.titlebar .controls .content {
