@@ -20,7 +20,7 @@ export default function MicrophoneComponent({ language = 'id-ID' }: { language?:
     const [recordingComplete, setRecordingComplete] = useState(false);
     const [transcript, setTranscript] = useState("");
     const [isPaused, setIsPaused] = useState(false);
-    const [codeChangesResult, setCodeChanges] = useState<string>("")
+    const [codeChangesResult, setCodeChanges] = useState(null)
     
     // Create a ref to store the full transcript
     const fullTranscriptRef = useRef("");
@@ -191,9 +191,9 @@ export default function MicrophoneComponent({ language = 'id-ID' }: { language?:
         });
 
         try {
-            setCodeChanges(response.data.text)
+            setCodeChanges(response.data.data)
         } catch (error) {
-            setCodeChanges("tidak ada hasil");
+            setCodeChanges(null);
             console.error('Error transcribing audio:', error);
         }
     }
@@ -274,7 +274,7 @@ export default function MicrophoneComponent({ language = 'id-ID' }: { language?:
             }
 
             <div className="w-full h-fit text-white mt-10">
-                {codeChangesResult}
+                {JSON.stringify(codeChangesResult)}
             </div>
         </div>
     </div>
