@@ -31,15 +31,15 @@ export default function Navigation()
                 <div className="navigation">
                     <a ad-goto="/courses" suppressHydrationWarning>
                         <span className="icon">&#xed7e;</span>
-                        <span>Courses</span>
+                        <span>Kursus</span>
                     </a>
                     <a ad-goto="/certificates" suppressHydrationWarning>
                         <span className="icon">&#xf684;</span>
-                        <span>Certificates</span>
+                        <span>Sertifikat</span>
                     </a>
                     <a ad-goto="/code-editor" suppressHydrationWarning>
                         <span className="icon">&#xef4f;</span>
-                        <span>Code Editor</span>
+                        <span>Editor Kode</span>
                     </a>
                     { menus }
                 </div>
@@ -48,15 +48,15 @@ export default function Navigation()
                 <div className="navigation">
                     <a ad-goto="/courses" suppressHydrationWarning>
                         <span className="icon">&#xed7b;</span>
-                        <span>Courses</span>
+                        <span>Kursus</span>
                     </a>
                     <a ad-goto="/certificates" suppressHydrationWarning>
                         <span className="icon">&#xf683;</span>
-                        <span>Certificates</span>
+                        <span>Sertifikat</span>
                     </a>
                     <a ad-goto="/code-editor" suppressHydrationWarning>
                         <span className="icon">&#xef4f;</span>
-                        <span>Code Editor</span>
+                        <span>Editor Kode</span>
                     </a>
                 </div>
             </section>

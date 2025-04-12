@@ -1,8 +1,8 @@
-# Syntax
+# Sintaks
 
-In the previous chapter, we created a Java file called `Main.java`, and we used the following code to print "Hello World" to the screen:
+Pada bab sebelumnya, kita telah membuat sebuah file Java bernama `Main.java`, dan menggunakan kode berikut untuk mencetak teks **"Hello World"** ke layar:
 
-``` java filename=Main.java
+```java filename=Main.java
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello World");
@@ -10,119 +10,140 @@ public class Main {
 }
 ```
 
-## Example explained
-Every line of code that runs in Java must be inside a `class`. And the class name should always start with an uppercase first letter. In our example, we named the class Main.
+## Penjelasan Contoh
 
-Note: Java is case-sensitive: "MyClass" and "myclass" has different meaning.
+Setiap baris kode yang dijalankan dalam Java harus berada di dalam sebuah `class`. Nama kelas harus selalu diawali dengan huruf kapital. Dalam contoh di atas, kita memberi nama kelas dengan `Main`.
 
-The name of the java file must match the class name. When saving the file, save it using the class name and add ".java" to the end of the filename. To run the example above on your computer, make sure that Java is properly installed: Go to the Get Started Chapter for how to install Java. The output should be:
+**Catatan:** Java bersifat *case-sensitive*, artinya penulisan huruf besar dan kecil memiliki makna yang berbeda. Misalnya `MyClass` dan `myclass` dianggap sebagai dua hal yang berbeda.
 
-``` txt filename=Output
+Nama file Java harus sesuai dengan nama kelas. Saat menyimpan file, simpanlah dengan nama kelas dan tambahkan ekstensi `.java`. Untuk menjalankan contoh di atas di komputer Anda, pastikan bahwa Java telah terinstal dengan benar: silakan merujuk ke bab *Get Started* untuk panduan instalasi. Output dari program tersebut adalah:
+
+```txt filename=Output
 Hello World
 ```
 
-## The main Method
+## Metode `main()`
 
-The `main()` method is required and you will see it in every Java program:
+Metode `main()` bersifat wajib dan akan selalu Anda temui pada setiap program Java:
 
-``` java
+```java
 public static void main(String[] args)
 ```
 
-Any code inside the `main()` method will be executed. Don't worry about the keywords before and after it. You will get to know them bit by bit while reading this tutorial.
+Setiap kode yang ditulis di dalam metode `main()` akan dijalankan. Jangan khawatir dahulu mengenai kata kunci sebelum dan sesudahnya. Anda akan mempelajarinya secara bertahap selama mengikuti tutorial ini.
 
-For now, just remember that every Java program has a    `class` name which must match the filename, and that every program must contain the `main()` method.
+Untuk sekarang, cukup pahami bahwa setiap program Java harus memiliki:
+- Nama `class` yang sesuai dengan nama file, dan
+- Sebuah metode `main()` sebagai titik awal eksekusi program.
 
 ## Output
-Inside the `main()` method, we can use the `println()` method to print a line of text to the screen:
 
-``` java
+Di dalam metode `main()`, kita dapat menggunakan metode `println()` untuk mencetak satu baris teks ke layar:
+
+```java
 public static void main(String[] args) {
     System.out.println("Hello World");
 }
 ```
-``` txt filename=Output
+
+```txt filename=Output
 Hello World
 ```
 
-## Comments
-Comments can be used to explain Java code, and to make it more readable. It can also be used to prevent execution when testing alternative code.
+## Komentar
 
-### Single-line Comments
-Single-line comments start with two forward slashes (`//`). Any text between `//` and the end of the line is ignored by Java (will not be executed).
+Komentar digunakan untuk menjelaskan kode Java agar lebih mudah dibaca dan dipahami. Komentar juga dapat digunakan untuk menonaktifkan bagian kode ketika sedang melakukan pengujian.
 
-This example uses a single-line comment before a line of code:
-``` java
-// This is a comment
-System.out.println("Hello World");
-```
-This example uses a single-line comment at the end of a line of code:
-``` java
-System.out.println("Hello World"); // This is a comment
-```
+### Komentar Satu Baris
 
-### Multi-line Comments
-Multi-line comments start with `/*` and ends with `*/`. Any text between `/*` and `*/` will be ignored by Java.
+Komentar satu baris diawali dengan dua garis miring `//`. Segala teks setelah `//` hingga akhir baris akan diabaikan oleh Java (tidak dieksekusi).
 
-This example uses a multi-line comment (a comment block) to explain the code:
-``` java
-/* The code below will print the words Hello World
-to the screen, and it is amazing */
+Contoh komentar satu baris sebelum kode:
+
+```java
+// Ini adalah komentar
 System.out.println("Hello World");
 ```
 
-It's up to you which one you use. Normally, we use `//` for short comments, and `/* */` for longer.
+Contoh komentar satu baris di akhir kode:
 
-## Variables
-Variables are containers for storing data values. In Java, there are different types of variables, for example:
-
-- `String` - stores text, such as "Hello". String values are surrounded by double quotes
-- `int` - stores integers (whole numbers), without decimals, such as 123 or -123
-- `float` - stores floating point numbers, with decimals, such as 19.99 or -19.99
-- `char` - stores single characters, such as 'a' or 'B'. Char values are surrounded by single quotes
-- `boolean` - stores values with two states: true or false
-
-### Declaring (Creating) Variables
-To create a variable, you must specify the type and assign it a value:
-``` java
-type variableName = value;
+```java
+System.out.println("Hello World"); // Ini juga komentar
 ```
-Where _type_ is one of Java's types (such as `int` or `String`), and _variableName_ is the name of the variable (such as **x** or **name**). The `=` is used to assign values to the variable.
 
-To create a variable that should store text, look at the following example:
-``` java
-// Create a variable called name of type String and assign it the value "John".
-// Then we use println() to print the name variable:
+### Komentar Multi-baris
 
+Komentar multi-baris dimulai dengan `/*` dan diakhiri dengan `*/`. Segala teks di antara kedua tanda tersebut akan diabaikan oleh Java.
+
+Contoh komentar multi-baris:
+
+```java
+/* Kode di bawah ini akan mencetak "Hello World"
+ke layar, dan ini sangat menarik */
+System.out.println("Hello World");
+```
+
+Penggunaan jenis komentar bergantung pada kebutuhan: gunakan `//` untuk komentar pendek dan `/* */` untuk komentar yang lebih panjang.
+
+## Variabel
+
+Variabel adalah tempat untuk menyimpan nilai data. Dalam Java, terdapat beberapa jenis variabel, antara lain:
+
+- `String` – menyimpan teks, misalnya: "Hello". Nilai `String` ditulis dalam tanda kutip ganda.
+- `int` – menyimpan bilangan bulat tanpa desimal, seperti 123 atau -123.
+- `float` – menyimpan bilangan desimal, seperti 19.99 atau -19.99.
+- `char` – menyimpan satu karakter, seperti 'a' atau 'B'. Nilai `char` ditulis dalam tanda kutip tunggal.
+- `boolean` – menyimpan nilai `true` atau `false`.
+
+### Mendeklarasikan (Membuat) Variabel
+
+Untuk membuat variabel, tentukan *tipe data* dan berikan nilai awal:
+
+```java
+tipe namaVariabel = nilai;
+```
+
+Contoh menyimpan teks ke dalam variabel:
+
+```java
+// Membuat variabel bernama name dengan tipe String dan nilai "John"
 String name = "John";
 System.out.println(name);
 ```
-``` txt filename=Output
+
+```txt filename=Output
 John
 ```
-To create a variable that should store a number, look at the following example:
-``` java
-// Create a variable called myNum of type int and assign it the value 15:
+
+Contoh menyimpan angka:
+
+```java
+// Membuat variabel bernama myNum dengan tipe int dan nilai 15
 int myNum = 15;
 System.out.println(myNum);
 ```
-``` txt filename=Output
+
+```txt filename=Output
 15
 ```
-Note that if you assign a new value to an existing variable, it will overwrite the previous value:
-``` java
-// Change the value of myNum from 15 to 20:
+
+Jika Anda memberikan nilai baru ke variabel yang sudah ada, maka nilainya akan menimpa nilai sebelumnya:
+
+```java
 int myNum = 15;
-myNum = 20;  // myNum is now 20
+myNum = 20;  // Sekarang nilainya menjadi 20
 System.out.println(myNum);
 ```
-``` txt filename=Output
+
+```txt filename=Output
 20
 ```
 
-### Other types
-A demonstration of how to declare variables of other types:
-``` java
+### Jenis Lain
+
+Contoh mendeklarasikan berbagai tipe data:
+
+```java
 int myNum = 5;
 float myFloatNum = 5.99f;
 char myLetter = 'D';

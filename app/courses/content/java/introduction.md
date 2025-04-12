@@ -1,7 +1,9 @@
-# Introduction to Java
+# Pengantar Java
 
-## Learn Java
+## Belajar Java
 
-Java is a popular programming language. Java is used to develop mobile apps, web apps, desktop apps, games, and much more. Let's watch this video before we start the course.
+Java adalah bahasa pemrograman yang populer. Java digunakan untuk mengembangkan aplikasi mobile, aplikasi web, aplikasi desktop, gim, dan masih banyak lagi.  
 
-![image info](https://ehuwt7zd2je.exactdn.com/wp-content/uploads/2024/02/learning-java-beginers.jpg)
+Sebelum kita memulai kursus ini, mari kita tonton video berikut terlebih dahulu:
+
+![Gambar Info](https://ehuwt7zd2je.exactdn.com/wp-content/uploads/2024/02/learning-java-beginers.jpg)

@@ -9,35 +9,35 @@ const element = (
                 <div className="info">
                     <span className="name">User</span>
                     <span className="description">Platinum member</span>
-                    <button className="plain critical">Sign out</button>
+                    <button className="plain critical" id="Button_SignOut">Keluar</button>
                 </div>
             </div>
 
-            <div className="list" ad-header="Settings">
+            <div className="list" ad-header="Setelan">
                 <div className="stack">
-                    <span>Appearance</span>
-                    <select className="plain">
-                        <option>System Default</option> 
-                        <option>Light</option>
-                        <option>Dark</option>
+                    <span>Penampilan</span>
+                    <select className="plain" id="Select_Theme">
+                        <option value="system">Default Sistem</option> 
+                        <option value="light">Terang</option>
+                        <option value="dark">Gelap</option>
                     </select>
                 </div>
                 <div className="stack">
-                    <span>Language</span>
+                    <span>Bahasa</span>
                     <select className="plain">
-                        <option>English</option>
+                        <option>Indonesia</option>
                     </select>
                 </div>
             </div>
 
-            <div className="list" ad-header="About">
+            <div className="list" ad-header="Tentang">
                 <div className="stack">
-                    <span>Version</span>
+                    <span>Versi</span>
                     <span style={{opacity: 0.7}}>1.0</span>
                 </div>
                 <div className="stack vertical">
-                    <span>Copyright</span>
-                    <span style={{opacity: 0.7}}>© 2025 Unparians. All Rights Reserved.</span>
+                    <span>Hak Cipta</span>
+                    <span style={{opacity: 0.7}}>© 2025 Codi. Semua Hak Dilindungi.</span>
                 </div>
             </div>
         </div>

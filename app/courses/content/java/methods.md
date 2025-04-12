@@ -1,33 +1,36 @@
-# Methods
-A method is a block of code which only runs when it is called. You can pass data, known as parameters, into a method. Methods are used to perform certain actions, and they are also known as functions. Why use methods? To reuse code: define the code once, and use it many times.
+# Metode (Methods)
 
-## Create a Method
-A method must be declared within a class. It is defined with the name of the method, followed by parentheses (). Java provides some pre-defined methods, such as System.out.println(), but you can also create your own methods to perform certain actions:
+Metode adalah blok kode yang hanya dijalankan ketika dipanggil. Anda dapat mengirimkan data, yang dikenal sebagai *parameter*, ke dalam sebuah metode. Metode digunakan untuk melakukan tindakan tertentu, dan juga dikenal sebagai *fungsi*.  
+Mengapa menggunakan metode? Untuk *mengulang penggunaan kode*: definisikan kode sekali, dan gunakan berkali-kali.
 
-``` java filename=Main.java
-public class Main {
-    static void myMethod() {
-        // code to be executed
-    }
-}
-```
+## Membuat Sebuah Metode
 
-**Explanation:**
-- `myMethod()` is the name of the method
-- `static` means that the method belongs to the Main class and not an object of the Main class. You will learn more about objects and how to access methods through objects later in this tutorial.
-- `void` means that this method does not have a return value. You will learn more about return values later in this chapter.
-
-## Call a Method
-
-To call a method in Java, write the method's name followed by two parentheses () and a semicolon;
-
-In the following example, myMethod() is used to print a text (the action), when it is called:
+Metode harus dideklarasikan di dalam sebuah kelas. Ia didefinisikan dengan nama metode, diikuti oleh tanda kurung `()`. Java menyediakan beberapa metode bawaan, seperti `System.out.println()`, tetapi Anda juga dapat membuat metode sendiri untuk menjalankan tindakan tertentu:
 
 ```java filename=Main.java
-// Inside main, call the myMethod() method
 public class Main {
     static void myMethod() {
-        System.out.println("I just got executed!");
+        // kode yang akan dijalankan
+    }
+}
+```
+
+**Penjelasan:**
+- `myMethod()` adalah nama dari metode tersebut  
+- `static` berarti metode tersebut milik kelas `Main`, bukan objek dari kelas `Main`. Anda akan mempelajari lebih lanjut tentang objek dan bagaimana mengakses metode melalui objek di bagian lain dari tutorial ini.  
+- `void` berarti metode ini tidak mengembalikan nilai. Anda akan mempelajari lebih lanjut tentang nilai balik (*return value*) pada bab ini.
+
+## Memanggil Sebuah Metode
+
+Untuk memanggil metode dalam Java, tuliskan nama metodenya diikuti oleh tanda kurung `()` dan titik koma `;`.
+
+Dalam contoh berikut, `myMethod()` digunakan untuk mencetak teks (tindakan), ketika dipanggil:
+
+```java filename=Main.java
+// Di dalam main, panggil metode myMethod()
+public class Main {
+    static void myMethod() {
+        System.out.println("Saya baru saja dijalankan!");
     }
 
     public static void main(String[] args) {
@@ -36,15 +39,16 @@ public class Main {
 }
 ```
 
-``` txt filename=Output
-I just got executed!
+```txt filename=Output
+Saya baru saja dijalankan!
 ```
 
-A method can also be called multiple times:
-``` java filename=Main.java
+Metode juga bisa dipanggil berkali-kali:
+
+```java filename=Main.java
 public class Main {
     static void myMethod() {
-        System.out.println("I just got executed!");
+        System.out.println("Saya baru saja dijalankan!");
     }
 
     public static void main(String[] args) {
@@ -54,16 +58,18 @@ public class Main {
     }
 }
 ```
-``` txt filename=Output
-I just got executed!
-I just got executed!
-I just got executed!
+
+```txt filename=Output
+Saya baru saja dijalankan!
+Saya baru saja dijalankan!
+Saya baru saja dijalankan!
 ```
 
-# Parameters and Arguments
-Information can be passed to methods as a parameter. Parameters act as variables inside the method. Parameters are specified after the method name, inside the parentheses. You can add as many parameters as you want, just separate them with a comma.
+# Parameter dan Argumen
 
-The following example has a method that takes a `String` called fname as parameter. When the method is called, we pass along a first name, which is used inside the method to print the full name:
+Informasi dapat dikirim ke dalam metode sebagai parameter. Parameter berfungsi seperti variabel di dalam metode. Parameter ditentukan setelah nama metode, di dalam tanda kurung. Anda bisa menambahkan sebanyak mungkin parameter, cukup pisahkan dengan koma.
+
+Contoh berikut memiliki metode yang menerima sebuah `String` bernama `fname` sebagai parameter. Ketika metode dipanggil, kita mengirimkan nama depan, yang digunakan dalam metode untuk mencetak nama lengkap:
 
 ```java filename=Main.java
 public class Main {
@@ -78,17 +84,19 @@ public class Main {
     }
 }
 ```
+
 ```txt filename=Output
 Liam Refsnes
 Jenny Refsnes
 Anja Refsnes
 ```
 
-You can have as many parameters as you like:
+Anda dapat memiliki sebanyak mungkin parameter yang diinginkan:
+
 ```java filename=Main.java
 public class Main {
     static void myMethod(String fname, int age) {
-        System.out.println(fname + " is " + age);
+        System.out.println(fname + " berumur " + age);
     }
 
     public static void main(String[] args) {
@@ -98,15 +106,18 @@ public class Main {
     }
 }
 ```
+
 ```txt filename=Output
-Liam is 5
-Jenny is 8
-Anja is 31
+Liam berumur 5
+Jenny berumur 8
+Anja berumur 31
 ```
 
-# Return Values
-In the previous section, we used the `void` keyword in all examples, which indicates that the method should not return a value. If you want the method to return a value, you can use a primitive data type (such as `int`, `char`, `etc`.) instead of `void`, and use the `return` keyword inside the method:
-``` java filename=Main.java
+# Nilai Kembali (*Return Values*)
+
+Pada bagian sebelumnya, kita menggunakan kata kunci `void` dalam semua contoh, yang menunjukkan bahwa metode tersebut tidak mengembalikan nilai. Jika Anda ingin metode mengembalikan nilai, Anda dapat menggunakan tipe data primitif (seperti `int`, `char`, dan lain-lain) sebagai pengganti `void`, dan menggunakan kata kunci `return` di dalam metode:
+
+```java filename=Main.java
 public class Main {
     static int myMethod(int x) {
         return 5 + x;
@@ -114,15 +125,18 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println(myMethod(3));
-        // Outputs 8 (5 + 3)
-  }
+        // Output: 8 (5 + 3)
+    }
 }
 ```
-``` txt filename=Output
+
+```txt filename=Output
 8
 ```
-This example returns the sum of a method's two parameters:
-``` java filename=Main.java
+
+Contoh berikut mengembalikan hasil penjumlahan dari dua parameter dalam metode:
+
+```java filename=Main.java
 public class Main {
     static int myMethod(int x, int y) {
         return x + y;
@@ -133,6 +147,7 @@ public class Main {
     }
 }
 ```
-``` txt filename=Output
+
+```txt filename=Output
 8
 ```

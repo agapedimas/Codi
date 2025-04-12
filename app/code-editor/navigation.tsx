@@ -5,7 +5,7 @@ const element = (
     <div className="separator">Editor</div>
         
         <a className="dropdown expanded">
-            <span>My App</span>
+            <span>Aplikasi Saya</span>
         </a>
         <a className="dropdown innerdropdown">
             <span>.settings</span>

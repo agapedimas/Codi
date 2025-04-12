@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   
 
 export default async function CoursePage({ params }: { params: { slug: string[] } }) {
-    const markdownData = await getMarkdownContent(params.slug);
+    const markdownData = await getMarkdownContent(await params.slug);
 
     if (!markdownData) {
         return <h1>Content Not Found</h1>;

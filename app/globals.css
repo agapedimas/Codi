@@ -212,7 +212,7 @@ header.titlebar .controls .content
             }
         }
 
-        pre::before
+        pre[data-filename]::before
         {
             content: attr(data-filename);
             display: block;
@@ -232,6 +232,10 @@ header.titlebar .controls .content
 
 #PopOver_Profile
 {
+    .container
+    {
+        background: var(--background-popover-grid);
+    }
     .profile
     {
         display: grid;

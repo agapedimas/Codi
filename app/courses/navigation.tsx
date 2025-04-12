@@ -2,27 +2,27 @@ import { Fragment } from "react";
 
 const element = (
     <Fragment>
-        <div className="separator">Your Courses</div>
+        <div className="separator">Kursus Saya</div>
         <a className="dropdown expanded">
             <span>Java</span>
         </a>
             <a className="innerdropdown" ad-goto="/courses/java/introduction" suppressHydrationWarning>
-                <span>Introduction to Java</span>
+                <span>Pengantar Java</span>
             </a>
             <a className="innerdropdown" ad-goto="/courses/java/syntax" suppressHydrationWarning>
-                <span>Syntax</span>
+                <span>Sintaks</span>
             </a>
             <a className="innerdropdown" ad-goto="/courses/java/methods" suppressHydrationWarning>
-                <span>Methods</span>
+                <span>Metode</span>
             </a>
             <a className="innerdropdown" ad-goto="/courses/java/classes" suppressHydrationWarning>
-                <span>Classes</span>
+                <span>Kelas</span>
             </a>
             <a className="innerdropdown" ad-goto="/courses/java/data-structures" suppressHydrationWarning>
-                <span>Data Structures</span>
+                <span>Struktur Data</span>
             </a>
             <a className="innerdropdown" ad-goto="/courses/java/quiz" suppressHydrationWarning>
-                <span>Quiz</span>
+                <span>Kuis</span>
             </a>
         <a className="dropdown">
             <span>C++</span>

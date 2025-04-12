@@ -9,12 +9,12 @@ const element = (
                     <button className="plain icon">&#xef59;</button>
                 </div>
                 <label className="InputContainer_Textbox" >
-                    <input id="Input_GlobalSearch" placeholder="Search" autoComplete="off" type="search" ad-abortstyle="true"/>
+                    <input id="Input_GlobalSearch" placeholder="Cari" autoComplete="off" type="search" ad-abortstyle="true"/>
                 </label>
                 <div className="accessibility"> 
                     <button className="accent">
                         <span className="icon">&#xfb58;</span>
-                        <span>Read aloud</span>
+                        <span>Bacakan</span>
                     </button>
                 </div>
                 <div className="profile" id="Image_Profile">
