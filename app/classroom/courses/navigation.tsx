@@ -6,22 +6,22 @@ const element = (
         <a className="dropdown expanded">
             <span>Java</span>
         </a>
-            <a className="innerdropdown" ad-goto="/courses/java/introduction" suppressHydrationWarning>
+            <a className="innerdropdown" ad-goto="/classroom/courses/java/introduction" suppressHydrationWarning>
                 <span>Pengantar Java</span>
             </a>
-            <a className="innerdropdown" ad-goto="/courses/java/syntax" suppressHydrationWarning>
+            <a className="innerdropdown" ad-goto="/classroom/courses/java/syntax" suppressHydrationWarning>
                 <span>Sintaks</span>
             </a>
-            <a className="innerdropdown" ad-goto="/courses/java/methods" suppressHydrationWarning>
+            <a className="innerdropdown" ad-goto="/classroom/courses/java/methods" suppressHydrationWarning>
                 <span>Metode</span>
             </a>
-            <a className="innerdropdown" ad-goto="/courses/java/classes" suppressHydrationWarning>
+            <a className="innerdropdown" ad-goto="/classroom/courses/java/classes" suppressHydrationWarning>
                 <span>Kelas</span>
             </a>
-            <a className="innerdropdown" ad-goto="/courses/java/data-structures" suppressHydrationWarning>
+            <a className="innerdropdown" ad-goto="/classroom/courses/java/data-structures" suppressHydrationWarning>
                 <span>Struktur Data</span>
             </a>
-            <a className="innerdropdown" ad-goto="/courses/java/quiz" suppressHydrationWarning>
+            <a className="innerdropdown" ad-goto="/classroom/courses/java/quiz" suppressHydrationWarning>
                 <span>Kuis</span>
             </a>
         <a className="dropdown">
