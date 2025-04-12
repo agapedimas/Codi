@@ -15,7 +15,8 @@ export const metadata: Metadata =
 };
 
 export default async function CoursePage({ params }: { params: { slug: string[] } }) {
-    const markdownData = await getMarkdownContent(await params.slug);
+    params = await params;
+    const markdownData = await getMarkdownContent(params.slug);
 
     if (!markdownData) {
         return <h1>Content Not Found</h1>;

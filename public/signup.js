@@ -164,7 +164,7 @@ Button_SignUp.onclick = SignUp;
             }
             else if (data.status >= 500 && data.status < 600)
             {
-                $(".panel .inputs #Text_ErrorSignUp").html("Server sedang bermasalah. Coba lagig nanti.");
+                $(".panel .inputs #Text_ErrorSignUp").html("Server sedang bermasalah. Coba lagi nanti.");
             }
             else
             {

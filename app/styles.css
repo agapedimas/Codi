@@ -1,1 +1,233 @@
 @import "https://assets.agapedimas.com/ui/v3/style.css";
+
+#Grid_Assistant
+{
+    --button: #8497b0;
+    position: fixed;
+    display: grid;
+    grid-auto-rows: max-content auto;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    background: var(--background-context);
+    border-radius: 15px;
+    backdrop-filter: var(--filter-blur);
+    box-shadow: var(--filter-shadow);
+    transition: var(--animation) transform, 0.15s opacity;
+    transform: translateY(5%);
+    opacity: 0;
+    pointer-events: none;
+    width: 325px;
+    min-height: 500px;
+    overflow: hidden;
+
+    .bar
+    {
+        position: relative;
+        height: 30px;
+        background: transparent;
+
+        button
+        {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border-radius: 100%;
+            color: var(--foreground-description);
+            font-weight: bold;
+            font-size: 0.6em;
+            padding: 0;
+            width: 2.5em;
+            height: auto;
+            aspect-ratio: 1;
+        }
+    }
+    .bar::after
+    {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 4px;
+        width: 40px;
+        border-radius: 10px;
+        background: var(--overlay-3);
+    }
+    .content
+    {
+        display: grid;
+        grid-auto-rows: max-content auto max-content;
+        padding: 25px;
+
+        .inputs
+        {
+            button
+            {
+                --accent: var(--button);
+                border-radius: 100%;
+                width: 2em;
+                height: auto;
+                font-size: 3.5em;
+                aspect-ratio: 1;
+                transform: translateX(calc(325px / 2 - 2em / 2 - 25px));
+                transition: var(--animation);
+            }
+
+            .action
+            {
+                width: 100%;
+                font-family: var(--font-bold);
+                font-size: 1.5em;
+                text-align: center;
+                margin: 1em 0;
+                transition: var(--animation) transform;
+            }
+
+            .phrase
+            {
+                font-family: var(--font-bold);
+                font-size: 1.5em;
+                transition: var(--animation) transform;
+            }
+        }
+
+        .options
+        {
+            span
+            {
+                display: none;
+            }
+            span.desc
+            {
+                color: var(--foreground-description);
+                margin: 0.5em 0 1em;
+            }
+            .lists
+            {
+                display: grid;
+                grid-auto-flow: column;
+                grid-auto-columns: 90%;
+                grid-auto-rows: 150px;
+                gap: 10px;
+                margin: 0 -25px 1em;
+                padding: 0 25px;
+                overflow-x: auto;
+                scrollbar-width: thin;
+    
+                .option
+                {
+                    border: 1px solid var(--border-context);
+                    font-family: monospace, var(--font-normal);
+                    border-radius: 10px;
+                    padding: 0.75em;
+                    transition: 0.15s background;
+                }
+                .option:hover
+                {
+                    background: var(--background-input-hover);
+                }
+                .option:active
+                {
+                    background: var(--background-input-active);
+                }
+    
+                .option::before
+                {
+                    content: attr(option);
+                    font-family: var(--font-bold);
+                    margin-bottom: 0.5em;
+                    display: grid;
+                    background: var(--overlay-6);
+                    width: 1.75em;
+                    aspect-ratio: 1;
+                    align-items: center;
+                    justify-items: center;
+                    border-radius: 100%;
+                }
+            }
+        }
+
+        .button
+        {
+            display: grid;
+            text-align: center;
+            gap: 0.5em;
+
+            button
+            {
+                font-size: 1.1em;
+                border-radius: 10px;
+                padding: 0.65em 0.75em;
+            }
+
+            > span
+            {
+                color: var(--foreground-description);
+                margin-bottom: 1em;
+                font-size: 0.9em;
+                font-family: var(--font-semibold);
+                letter-spacing: 0.015em;
+            }
+        }
+    }
+}
+
+#Grid_Assistant.opened
+{
+    transform: scale(1.01) translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+#Grid_Assistant.listening
+{
+    --button: #bf0000;
+}
+
+#Grid_Assistant.choose .options > span
+{
+    display: block;
+}
+
+#Grid_Assistant.choose .inputs button
+{
+    width: 2em;
+    font-size: 1.25em;
+    transform: translateX(0) translateY(-20px);
+}
+#Grid_Assistant.choose .inputs .action
+{
+    text-align: left;
+    transform-origin: left;
+    transform: scale(0.85) translateY(-1em);
+    font-size: 1em;
+    font-family: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: var(--foreground-description);
+}
+#Grid_Assistant.choose .inputs .phrase
+{
+    text-align: left;
+    transform: translateY(-1em);
+}
+
+#Grid_Assistant.done .inputs .action
+{
+    transform: scale(0.85);
+    transform-origin: bottom;
+    font-size: 1em;
+    font-family: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: var(--foreground-description);
+}
+
+
+#Grid_Assistant.done .inputs .phrase
+{
+    transform: translateY(-0.5em);
+    text-align: center;
+}
