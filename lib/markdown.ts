@@ -11,7 +11,7 @@ import { visit } from "unist-util-visit";
 
 
 export function getAllMarkdownSlugs(): string[] {
-	const contentDir = path.join(process.cwd(), "app/courses/content");
+	const contentDir = path.join(process.cwd(), "app/classroom/courses/content");
 
 	function getSlugs(dir: string, parentPath = ""): string[] {
 	  return fs.readdirSync(dir).flatMap((file) => {
@@ -32,7 +32,7 @@ export function getAllMarkdownSlugs(): string[] {
 }
 
 export async function getMarkdownContent(slugArr: string[]) {
-	const fullPath = path.join(process.cwd(), "app/courses/content", ...slugArr) + ".md";
+	const fullPath = path.join(process.cwd(), "app/classroom/courses/content", ...slugArr) + ".md";
   
 	try {
 	  const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -76,13 +76,13 @@ export async function getMarkdownContent(slugArr: string[]) {
 		contentHtml: String(file),
 	  };
 	} catch (err) {
-	  console.error("Gagal parse markdown:", err);
+	  console.error("Gagal parse markdown:\n", err);
 	  return null;
 	}
   }
 
 
 export function checkFileExists(slug: string) {
-	const filePath = path.join(process.cwd(), "app/courses/content", slug + ".md");
+	const filePath = path.join(process.cwd(), "app/classroom/courses/content", slug + ".md");
 	return fs.existsSync(filePath);
 }

@@ -3,6 +3,7 @@
 import { Fragment, useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { java } from "@codemirror/lang-java";
+import { Metadata } from "next";
 
 type Props = {
 	defaultCode: string;

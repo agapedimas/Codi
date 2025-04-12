@@ -15,29 +15,29 @@ import Menu_CodeEditor from "./code-editor/navigation";
 
 export default function Navigation() 
 { 
-    let path = usePathname();
+    const path = usePathname();
     let menus;
     
-    if (path.startsWith("/courses"))
+    if (path.startsWith("/classroom/courses"))
         menus = <Menu_Courses/>;
-    if (path.startsWith("/certificates"))
+    if (path.startsWith("/classroom/certificates"))
         menus = <Menu_Certificates/>;
-    if (path.startsWith("/code-editor"))
+    if (path.startsWith("/classroom/code-editor"))
         menus = <Menu_CodeEditor/>;
 
     return (
         <nav>
             <section className="desktop">
                 <div className="navigation">
-                    <a ad-goto="/courses" suppressHydrationWarning>
+                    <a ad-goto="/classroom/courses" suppressHydrationWarning>
                         <span className="icon">&#xed7e;</span>
                         <span>Kursus</span>
                     </a>
-                    <a ad-goto="/certificates" suppressHydrationWarning>
+                    <a ad-goto="/classroom/certificates" suppressHydrationWarning>
                         <span className="icon">&#xf684;</span>
                         <span>Sertifikat</span>
                     </a>
-                    <a ad-goto="/code-editor" suppressHydrationWarning>
+                    <a ad-goto="/classroom/code-editor" suppressHydrationWarning>
                         <span className="icon">&#xef4f;</span>
                         <span>Editor Kode</span>
                     </a>
