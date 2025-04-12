@@ -32,6 +32,7 @@ export async function POST(request) {
 
                                 # TUGAS
                                 - Gunakan Bahasa Indonesia setiap saat
+                                - Jangan pernah berikan emoji atau semacamnya, hanya murni teks saja
                                 - Buat narasi singkat dan jelas dari konten halaman
                                 - Fokus pada informasi paling penting
                                 - Gunakan bahasa yang natural, komunikatif, dan santai
