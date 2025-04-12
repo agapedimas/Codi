@@ -1,10 +1,10 @@
+
 import type { Metadata } from "next";
 import Navigation from "./navigation";
 import Titlebar from "./titlebar";
 import "./globals.css";
 import Controls from "./controls";
 import Script from "next/script";
-
 export const metadata: Metadata = 
 {
 	title: "Codi",
