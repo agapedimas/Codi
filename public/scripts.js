@@ -314,24 +314,28 @@ async function StopRecognition(){
             let resultList = []
             let code = document.querySelector('.root .main')?.textContent || ''
 
-            for (let i = 0; i < snippet.length; i++) {
-                let text = snippet[i]
-                let changes = result[i]
-                let done = description[i]
-
-                function modifyCode(code, changes){
-                    // yet to implement (next commit)
-                    return ""
+            if (snippet){
+                for (let i = 0; i < snippet.length; i++) {
+                    let text = snippet[i]
+                    let changes = result[i]
+                    let done = description[i]
+    
+                    function modifyCode(code, changes){
+                        // yet to implement (next commit)
+                        return ""
+                    }
+                    let newJson = {
+                        text: text,
+                        action: modifyCode,
+                        done: done
+                    }
+                    console.log(newJson)
+                    resultList.push(newJson)
                 }
-                let newJson = {
-                    text: text,
-                    action: modifyCode,
-                    done: done
-                }
-                console.log(newJson)
-                resultList.push(newJson)
+                CodiAssistant_Update("choose", "", transcript, resultList)
+            } else{
+                CodiAssistant_Update("done", "Permintaan tidak dapat diproses", "Perintah tidak dapat dimengerti.")
             }
-            CodiAssistant_Update("choose", "", transcript, resultList)
         })
 
     } else{

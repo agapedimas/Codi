@@ -10,7 +10,6 @@ export async function POST(request) {
         const audioTranscript = formData.get('audioTranscript');
         const codeToModify = formData.get('codeToModify');
         
-        // Configuration settings integrated from the exported code
         const generationConfig = {
             temperature: 0.2,
             topP: 1,
@@ -20,101 +19,234 @@ export async function POST(request) {
             responseSchema: {
                 type: "object",
                 properties: {
-                    removed: {
-                        type: "object",
-                        properties: {
-                            lines: {
-                                type: "array",
-                                description: "Line numbers to be removed from the original code",
-                                items: {
-                                    type: "number"
-                                }
-                            }
-                        },
-                        required: ["lines"]
+                    snippet: {
+                        type: "array",
+                        items: { type: "string" },
+                        description: "Preview of all suggested code options"
                     },
-                    added: {
+                    desc: {
+                        type: "array",
+                        items: { type: "string" },
+                        description: "Description of all suggested code options"
+                    },
+                    0: {
                         type: "object",
                         properties: {
-                            codes: {
-                                type: "array",
-                                description: "Lines of code to be added",
-                                items: {
-                                    type: "string"
-                                }
+                            changes: {
+                                type: "object",
+                                properties: {
+                                    removed: {
+                                        type: "object",
+                                        properties: {
+                                            lines: {
+                                                type: "array",
+                                                items: { type: "number" }
+                                            }
+                                        },
+                                        required: ["lines"]
+                                    },
+                                    added: {
+                                        type: "object",
+                                        properties: {
+                                            codes: {
+                                                type: "array",
+                                                items: { type: "string" }
+                                            }
+                                        },
+                                        required: ["codes"]
+                                    }
+                                },
+                                required: ["removed", "added"]
                             }
                         },
-                        required: ["codes"]
+                        required: ["changes"]
+                    },
+                    1: {
+                        type: "object",
+                        properties: {
+                            changes: {
+                                type: "object",
+                                properties: {
+                                    removed: {
+                                        type: "object",
+                                        properties: {
+                                            lines: {
+                                                type: "array",
+                                                items: { type: "number" }
+                                            }
+                                        },
+                                        required: ["lines"]
+                                    },
+                                    added: {
+                                        type: "object",
+                                        properties: {
+                                            codes: {
+                                                type: "array",
+                                                items: { type: "string" }
+                                            }
+                                        },
+                                        required: ["codes"]
+                                    }
+                                },
+                                required: ["removed", "added"]
+                            }
+                        },
+                        required: ["changes"]
+                    },
+                    2: {
+                        type: "object",
+                        properties: {
+                            changes: {
+                                type: "object",
+                                properties: {
+                                    removed: {
+                                        type: "object",
+                                        properties: {
+                                            lines: {
+                                                type: "array",
+                                                items: { type: "number" }
+                                            }
+                                        },
+                                        required: ["lines"]
+                                    },
+                                    added: {
+                                        type: "object",
+                                        properties: {
+                                            codes: {
+                                                type: "array",
+                                                items: { type: "string" }
+                                            }
+                                        },
+                                        required: ["codes"]
+                                    }
+                                },
+                                required: ["removed", "added"]
+                            }
+                        },
+                        required: ["changes"]
+                    },
+                    3: {
+                        type: "object",
+                        properties: {
+                            changes: {
+                                type: "object",
+                                properties: {
+                                    removed: {
+                                        type: "object",
+                                        properties: {
+                                            lines: {
+                                                type: "array",
+                                                items: { type: "number" }
+                                            }
+                                        },
+                                        required: ["lines"]
+                                    },
+                                    added: {
+                                        type: "object",
+                                        properties: {
+                                            codes: {
+                                                type: "array",
+                                                items: { type: "string" }
+                                            }
+                                        },
+                                        required: ["codes"]
+                                    }
+                                },
+                                required: ["removed", "added"]
+                            }
+                        },
+                        required: ["changes"]
                     }
                 },
-                required: ["removed", "added"]
+                required: ["snippet"]
             }
         };
-        
+
         const model = ai.getGenerativeModel({
             model: modelName,
-            generationConfig: generationConfig,
+            generationConfig,
             systemInstruction: {
                 role: "You are CodeAssist, a specialized coding assistant that converts verbal programming concepts into executable code, with outputs in strict JSON format only.",
                 content: `
-                # CRITICAL: OUTPUT FORMAT REQUIREMENTS
-                LinesToBeRemoved = {"remove": {"lines":[3,4,5] Array<number>}}
-                CodesToBeAdded = {"codes": {["code_line_1", "code_line_2", ...] Array<string>}}
-                Return: JSON({linesToBeRemoved, CodesToBeAdded})
+                    # CRITICAL: OUTPUT FORMAT REQUIREMENTS
+                    LinesToBeRemoved = {"removed": {"lines":[3,4,5]}}
+                    CodesToBeAdded = {"added": {"codes":["code_line_1", "code_line_2", ...]}}
+                    Snippet = giving simple preview of all suggested code
 
-                - You MUST output ONLY valid JSON in this exact format:
-                    {"removed":{"lines":[line_numbers]}, "added":{"codes":["code_line_1", "code_line_2", ...]}}
-                - The "lines" array contains numbers of lines to be removed
-                - The "codes" array contains strings, each representing a single line of code to be added
-                - Example: {"removed":{"lines":[3,4,5]}, "added":{"codes":["function sum(a, b) {", "  return a + b;", "}"]}}
-                - DO NOT include explanations, descriptions, or any text outside this JSON structure
-                - If you need to include comments, put them IN the code lines themselves
+                    # FINAL STRUCTURE:
+                    {
+                    "snippet": ["suggestion1", "suggestion2", "suggestion3", ...],
+                    "desc": ["description1", "description2", "description3", ...],
+                    "0": {
+                        "changes": {
+                        "removed": { "lines": [ ... ] },
+                        "added": { "codes": [ ... ] }
+                        }
+                    },
+                    "1": {
+                        "changes": {
+                        "removed": { "lines": [ ... ] },
+                        "added": { "codes": [ ... ] }
+                        }
+                    },
+                    "2": {
+                        "changes": {
+                        "removed": { "lines": [ ... ] },
+                        "added": { "codes": [ ... ] }
+                        }
+                    },
+                    "3": {
+                        "changes": {
+                        "removed": { "lines": [ ... ] },
+                        "added": { "codes": [ ... ] }
+                        }
+                    }
+                    }
 
-                # PROCESSING STEPS (internal only, not for output)
-                1. Analyze the user's request to understand the programming concept
-                2. If code is provided, identify which lines need to be modified
-                3. Develop modular, well-structured code solution
-                4. Format your entire response as the specified JSON only
-
-                # REMINDER
-                - NEVER output any text before or after the JSON
-                - NEVER explain your reasoning outside the JSON
-                - NEVER apologize or explain why you're outputting only JSON
-                - Your ENTIRE response must be valid, parseable JSON
+                    # RULES:
+                    - Your ENTIRE response must be ONLY valid, parseable JSON.
+                    - DO NOT explain or wrap the output in any text.
+                    - All snippets should be combined in one "snippet" array at the top level.
+                    - Use clear indentation.
+                    - All modifications must be listed in the "changes" section.
+                    - Use numeric keys (0, 1, 2, 3) for different options.
+                    - Provide up to 4 different options when possible.
                 `
             }
         });
-        
-        let prompt = "Here is the prompt from an audio transcript from the user";
-        
+
+        // Build prompt
+        let prompt = "Generate code modifications from the user's request:\n\n";
+
         if (audioTranscript && audioTranscript.trim() !== "") {
-            prompt += `AUDIO TRANSCRIPT: ${audioTranscript}\n\n`;
+            prompt += `AUDIO TRANSCRIPT:\n${audioTranscript}\n\n`;
         }
-        
+
         if (codeToModify && codeToModify.trim() !== "") {
-            prompt += `CODE TO MODIFY: \n${codeToModify}\n\n`;
+            prompt += `CODE TO MODIFY:\n${codeToModify}\n\n`;
         }
-        
-        prompt += `Please implement this concept or make the requested modifications following all the rules`;
-        
+
+        prompt += `Please return only the modified code suggestions as JSON.`
+
         // Generate response
         const result = await model.generateContent(prompt);
         const response = await result.response;
-        
-        // Parse the JSON response before returning
-        let jsonResponse;
+
         try {
-            // Get the raw text and ensure it's valid JSON
             const text = response.text();
-            jsonResponse = JSON.parse(text);
-            
-            return Response.json({ 
-                data: jsonResponse,
-                success: true 
+            const parsed = JSON.parse(text);
+        
+            // Verify the new format has at least the snippet array and one option
+            if (!Array.isArray(parsed.snippet) || (!parsed[0] && !parsed[1] && !parsed[2] && !parsed[3])) {
+                throw new Error("Invalid format: expected snippet array and at least one numeric option");
+            }
+        
+            return Response.json({
+                data: parsed,
+                success: true
             });
-        } catch (jsonError) {
-            console.error("JSON parsing error:", jsonError);
-            // Return the raw text if parsing fails
+        } catch (parseError) {
+            console.error("JSON parsing error:", parseError);
             return Response.json({
                 text: response.text(),
                 error: "Failed to parse JSON response",
