@@ -75,7 +75,7 @@ export default function Titlebar({ type }: { type: string }) {
             )
         else
             return (
-                <button className="accent" id="Button_ReadAloud" suppressHydrationWarning>
+                <button className="accent" id="Button_ReadAloud" onClick={readPage} suppressHydrationWarning>
                     <span className="icon">&#xfb58;</span>
                     <span>Bacakan</span>
                 </button>
