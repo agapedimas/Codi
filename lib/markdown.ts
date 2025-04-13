@@ -84,8 +84,28 @@ export async function getMarkdownContent(slugArr: string[]) {
 	}
   }
 
+export function getQuizContent(topic: string)
+{
+	const fullPath = path.join(process.cwd(), "app/classroom/courses/content", topic, "quiz.json");
+	
+	try
+	{
+		if (fs.existsSync(fullPath) == false)
+			return null;
+	
+		const fileContents = fs.readFileSync(fullPath, "utf8");
+		
+		return JSON.parse(fileContents);
+	}
+	catch (err)
+	{
+		console.error("Gagal parse quiz:\n", err);
+		return null;
+	}	
+}
 
-export function checkFileExists(slug: string) {
+export function checkFileExists(slug: string) 
+{
 	const filePath = path.join(process.cwd(), "app/classroom/courses/content", slug + ".md");
 	return fs.existsSync(filePath);
 }

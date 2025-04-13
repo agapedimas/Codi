@@ -1,0 +1,226 @@
+.quiz
+{
+    margin: 0 auto;
+    height: 100%;
+    display: grid;
+    grid-auto-rows: max-content auto max-content;
+
+    > .content
+    {
+        margin: 0 -30px;
+        padding: 0 30px;
+        overflow-y: auto;
+    }
+
+    .question
+    {
+        font-family: var(--font-semibold);
+        font-size: 1.5em;
+        margin: 0.5em 0 0;
+    }
+
+    .desc
+    {
+        color: var(--foreground-description);
+    }
+
+    .options
+    {
+        display: grid;
+        margin: 1em 0;
+        gap: 0.5em;
+        
+        .answer
+        {
+            display: grid;
+            grid-auto-flow: column;
+            gap: .75em;
+            grid-auto-columns: max-content auto;
+            background: var(--overlay-7);
+            border: 2px solid var(--overlay-8);
+            border-radius: 15px;
+            padding: .75em;
+            align-items: center;
+            transition: background .15s;
+        }
+        .answer:hover
+        {
+            background: var(--overlay-6);
+        }
+        .answer:active
+        {
+            background: var(--overlay-5);
+        }
+        .answer.active
+        {
+            background: var(--accent);
+            color: white;
+        }
+        .answer::before
+        {
+            content: attr(ad-option);
+            font-family: var(--font-bold);
+            display: grid;
+            background: var(--overlay-6);
+            width: 1.75em;
+            font-size: 0.85em;
+            aspect-ratio: 1;
+            align-items: center;
+            justify-items: center;
+            border-radius: 100%;
+            transition: background .15s, color .15s;
+        }
+        .answer.active::before
+        {
+            background: white;
+            color: var(--accent);
+        }
+    }
+
+    .footer
+    {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: auto max-content;
+
+        .submit
+        {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: auto max-content;
+            font-size: 0.9em;
+            gap: 1em;    
+            align-items: center;    
+            justify-items: end;
+
+            .desc
+            {
+                text-align: right;
+                font-size: 0.9em;
+                max-width: 200px;
+                line-height: 1.15em;
+            }
+            
+            button
+            {
+                width: 150px;
+                border-radius: 8px;
+
+                .progressring
+                {
+                    width: 0.95em;
+                    display: none;
+                }
+            }
+        }
+        .submit.loading
+        {
+            button
+            {
+                .progressring
+                {
+                    display: block;
+                }
+            }
+        }
+
+        .assistant
+        {    
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: max-content auto;
+            gap: 1em;
+            align-items: center;
+
+            .phrase
+            {
+                font-family: var(--font-bold);
+            }
+
+            button
+            {
+                --accent: #8497b0;
+                border-radius: 100%;
+                width: 2em;
+                height: auto;
+                font-size: 1.25em;
+                aspect-ratio: 1;
+                transition: var(--animation);
+            }
+
+            button.listening
+            {
+                --accent: #bf0000;
+            }
+        }
+    }
+}
+
+#Sheet_Quiz
+{
+    .banner
+    {
+        display: grid;
+        margin: 2em 0 0;
+        text-align: center;
+        color: var(--accent-access);
+    }
+    .banner:before
+    {
+        content: "\ef1c";
+        font-size: 100px;
+        font-family: var(--font-icon);
+        line-height: 1;
+    }
+    .title
+    {
+        margin: 0.75em 0;
+        font-family: var(--font-bold);
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .reason:not(:empty)
+    {
+        text-align: center;
+        margin: 1em 0 2em;
+    }
+
+    button
+    {
+        font-size: 1.1em;
+        width: 100%;
+        padding: 10px;
+        border-radius: 12px;
+        margin: 0.15em 0;
+    }
+    button.next
+    {
+        display: block;
+    }
+    button.tryagain
+    {
+        margin: 1em 0 0;
+        display: none;
+    }
+}
+
+#Sheet_Quiz.false
+{
+    .banner
+    {
+        color: var(--critical);
+    }
+    .banner::before
+    {
+        content: "\fe60";
+    }
+    button.next
+    {
+        display: none;
+    }
+    button.tryagain
+    {
+        display: block;
+    }
+}

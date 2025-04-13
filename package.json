@@ -12,10 +12,13 @@
     "@codemirror/lang-java": "^6.0.1",
     "@google/genai": "^0.8.0",
     "@google/generative-ai": "^0.24.0",
+    "@tensorflow/tfjs": "^4.22.0",
     "@uiw/react-codemirror": "^4.23.10",
     "axios": "^1.8.4",
     "bcryptjs": "^3.0.2",
+    "face-api.js": "^0.22.2",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^0.488.0",
     "mysql2": "^3.14.0",
     "next": "15.2.4",
     "openai": "^4.93.0",
@@ -28,7 +31,8 @@
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
     "remark-rehype": "^11.1.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "webgazer": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
