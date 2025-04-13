@@ -14,15 +14,17 @@ export const metadata: Metadata =
     title: 'Kursus',
 };
 
-export default async function CoursePage({ params }: { params: { slug: string[] } }) {
-    params = await params;
-    const markdownData = await getMarkdownContent(params.slug);
+type slugParam = Promise<{ slug: string[] }>;
 
-    if (!markdownData) {
-        return <h1>Content Not Found</h1>;
-    }
+export default async function CoursePage(props: { params: slugParam }) 
+{
+	const { slug } = await props.params;
+	const markdownData = await getMarkdownContent(slug);
 
-    return (
-        <article dangerouslySetInnerHTML={{ __html: markdownData.contentHtml }} />
-    );
+	if (!markdownData)
+		return <div></div>;
+
+	return (
+		<article dangerouslySetInnerHTML={{ __html: markdownData.contentHtml }} />
+	);
 }

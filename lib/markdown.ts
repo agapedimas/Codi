@@ -35,6 +35,9 @@ export async function getMarkdownContent(slugArr: string[]) {
 	const fullPath = path.join(process.cwd(), "app/classroom/courses/content", ...slugArr) + ".md";
   
 	try {
+	  if (fs.existsSync(fullPath) == false)
+		return null;
+		
 	  const fileContents = fs.readFileSync(fullPath, "utf8");
   
 	  const file = await unified()

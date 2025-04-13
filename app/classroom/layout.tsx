@@ -1,13 +1,12 @@
 'use client'
 
-import type { Metadata } from "next";
 import Navigation from "./navigation";
 import Titlebar from "./titlebar";
 import "./styles.css";
 import Controls from "./controls";
-import Script from "next/script";
 import { Fragment } from "react";
 import { usePathname } from "next/navigation";
+import Script from "next/script";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) 
 {
@@ -26,7 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <div className="main">
                     {children}
                 </div>
-                <Script src="/scripts.js"></Script>
+                <Script src="/scripts.js"/>
             </div>
         </Fragment>
 	);

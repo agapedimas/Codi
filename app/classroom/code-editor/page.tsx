@@ -1,9 +1,8 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { java } from "@codemirror/lang-java";
-import { Metadata } from "next";
 
 type Props = {
 	defaultCode: string;
@@ -11,7 +10,7 @@ type Props = {
 	filename?: string;
 };
 
-export function CodeEditorBlock({ defaultCode, lang = "java", filename }: Props) {
+function CodeEditorBlock({ defaultCode }: Props) {
 	const [code, setCode] = useState(defaultCode);
 
 	return (
@@ -29,13 +28,14 @@ export function CodeEditorBlock({ defaultCode, lang = "java", filename }: Props)
 export default function Home() {
 	return (
 		<CodeEditorBlock
-			defaultCode={`public class Main {
-			public static void main(String[] args) {
-				System.out.println("halo dim");
-			}
-			}`}
-		filename="Main.java"
-		lang="java"
+			defaultCode={
+`public class Main {
+	public static void main(String[] args) {
+		System.out.println("Hello world!");
+	}
+}`}
+			filename="Main.java"
+			lang="java"
 		/>
 	);
 }

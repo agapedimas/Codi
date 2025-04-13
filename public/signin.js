@@ -114,8 +114,6 @@ Button_SignIn.onclick = SignIn;
             if (res.ok == false)
                 throw res;
             
-            $(".panel").removeClass("loading");
-            $(".panel .inputs input, .panel .inputs button").removeAttr("disabled");
             window.location.replace("/classroom");
         }
         catch (data)

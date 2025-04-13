@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 import axios from "axios";
 import { useEffect, useRef } from "react";
 
@@ -101,11 +102,11 @@ export default function Titlebar({ type }: { type: string }) {
                             { accessibility(type) }
                         </div>
                         <div className="profile" id="Image_Profile">
-                            <img src="/avatar.webp"/>
+                            <Image src="/avatar.webp" alt="Avatar pengguna" width={30} height={30}/>
                         </div>
                     </div>
                 </div>
-        </header>  
+            </header>  
         );
     }
 
