@@ -1,0 +1,112 @@
+[
+    {
+        "question": "Apa itu Array Multidimensional?",
+        "answer": [
+        "Dieksekusi (setiap kali) setelah blok kode dijalankan",
+        "Sebuah array kosong",
+        "Sebuah array yang berisi array lainnya",
+        "Dieksekusi (satu kali) sebelum blok kode dijalankan"
+        ],
+        "correct": 2,
+        "reason": "Array multidimensional di Java adalah array yang tiap elemennya juga merupakan array. Biasanya digunakan untuk menyimpan data dalam bentuk matriks, seperti int[][] matrix = new int[3][3];."
+    },
+    {
+        "question": "Apa perbedaan antara '=='' dan 'equals()' dalam Java?",
+        "answer": [
+        "'==' membandingkan nilai string, 'equals()' membandingkan alamat memori",
+        "'==' membandingkan alamat memori, 'equals()' membandingkan nilai objek",
+        "Keduanya identik",
+        "'equals()' hanya bisa dipakai untuk integer"
+        ],
+        "correct": 1,
+        "reason": "'==' membandingkan reference (alamat memori) sedangkan 'equals()' digunakan untuk membandingkan isi atau nilai dari objek tersebut."
+    },
+    {
+        "question": "Keyword 'final' pada Java digunakan untuk?",
+        "answer": [
+        "Membuat method menjadi overload",
+        "Mengizinkan subclass untuk override",
+        "Menyatakan bahwa variabel, method, atau class tidak dapat diubah",
+        "Menghentikan eksekusi program"
+        ],
+        "correct": 2,
+        "reason": "'final' digunakan agar variabel tidak bisa di-reassign, method tidak bisa di-override, dan class tidak bisa diturunkan (inheritance)."
+    },
+    {
+        "question": "Apa yang dimaksud dengan 'polymorphism' dalam OOP Java?",
+        "answer": [
+        "Kemampuan sebuah class untuk mengakses private class lain",
+        "Kemampuan objek untuk memiliki banyak bentuk melalui inheritance atau interface",
+        "Mengubah tipe data saat runtime",
+        "Salah satu bentuk rekursi"
+        ],
+        "correct": 1,
+        "reason": "Polymorphism memungkinkan objek memiliki banyak bentuk, biasanya dicapai melalui inheritance dan interface. Misalnya, method overriding dan method overloading."
+    },
+    {
+        "question": "Apa tujuan penggunaan keyword 'super' di Java?",
+        "answer": [
+        "Mengakses method static",
+        "Mengakses constructor class sendiri",
+        "Mengakses anggota dari superclass (class induk)",
+        "Mengakses interface"
+        ],
+        "correct": 2,
+        "reason": "'super' digunakan untuk mengakses constructor, method, atau field dari superclass (parent class)."
+    },
+    {
+        "question": "Manakah yang benar tentang interface di Java?",
+        "answer": [
+        "Interface bisa memiliki constructor",
+        "Interface bisa punya field final dan static",
+        "Interface bisa extend class",
+        "Interface bisa instantiate objek"
+        ],
+        "correct": 1,
+        "reason": "Interface tidak bisa punya constructor dan tidak bisa langsung diinstansiasi. Tapi field di interface secara default adalah public, static, dan final."
+    },
+    {
+        "question": "Apa perbedaan antara 'throw' dan 'throws' di Java?",
+        "answer": [
+        "'throw' untuk menangkap exception, 'throws' untuk melempar exception",
+        "'throw' melempar exception spesifik, 'throws' mendeklarasikan kemungkinan exception",
+        "Keduanya untuk menangani checked exception",
+        "'throws' untuk runtime exception saja"
+        ],
+        "correct": 1,
+        "reason": "'throw' digunakan untuk melempar exception tertentu di dalam blok program. 'throws' digunakan di deklarasi method untuk menunjukkan bahwa method tersebut bisa melempar exception."
+    },
+    {
+        "question": "Apa yang terjadi jika kita tidak menangani checked exception di Java?",
+        "answer": [
+        "Program tetap jalan",
+        "Compiler akan memberi peringatan",
+        "Compiler akan error",
+        "Program crash saat runtime"
+        ],
+        "correct": 2,
+        "reason": "Java mewajibkan developer untuk menangani checked exception menggunakan try-catch atau throws, kalau tidak akan error saat compile."
+    },
+    {
+        "question": "Apa perbedaan antara ArrayList dan LinkedList di Java?",
+        "answer": [
+        "ArrayList lebih lambat dalam akses indeks",
+        "LinkedList lebih efisien dalam akses indeks",
+        "ArrayList lebih efisien untuk akses indeks, LinkedList lebih efisien untuk manipulasi data",
+        "Keduanya sama persis"
+        ],
+        "correct": 2,
+        "reason": "ArrayList menggunakan array dinamis sehingga cepat dalam akses indeks. LinkedList lebih cepat saat melakukan insert/delete karena struktur datanya berupa node yang saling terhubung."
+    },
+    {
+        "question": "Apa yang dimaksud dengan garbage collection di Java?",
+        "answer": [
+        "Penghapusan manual objek",
+        "Pengumpulan log error",
+        "Proses otomatis penghapusan objek yang tidak lagi direferensikan",
+        "Mekanisme overloading method"
+        ],
+        "correct": 2,
+        "reason": "Garbage collector di Java secara otomatis menghapus objek yang tidak memiliki reference lagi untuk menghemat memori."
+    }
+]  
