@@ -1,9 +1,9 @@
 import mysql from 'mysql2/promise';
 
 export const db = mysql.createPool({
-    host: "localhost",
-    user: process.env.AD_SQL_USERNAME,
-    password: process.env.AD_SQL_PASSWORD,
+    host: "103.123.17.195",
+    user: process.env.SQL_USERNAME,
+    password: process.env.SQL_PASSWORD,
     port: 3306,
     database: "agapedim_codi",
     charset: "utf8mb4",
