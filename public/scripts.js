@@ -241,6 +241,7 @@ function initializeRecognition(language) {
             setTimeout(() => {
                 if (isRecording && !isPaused && !recordingComplete) {
                     try {
+                        recognition.stop();
                         recognition.start();
                     } catch(e) {
                         console.error("Error restarting recognition after end:", e);
@@ -267,6 +268,7 @@ function initializeRecognition(language) {
     setTimeout(() => {
         try {
             // console.log("Starting recognition");
+            recognition.stop();
             recognition.start();
         } catch(e) {
             console.error("Error in initial recognition start:", e);
