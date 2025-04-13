@@ -29,10 +29,19 @@ Button_SignOut.onclick = function()
     });
 }
 
+// init global var
+var isRecording = false;
+var recognition = null;
+var transcript = "";
+var fullTranscript = "";
+var pauseTimeout = null;
+var isPaused = false;
+var tempGeminiResult = {};
+
 if (window["Button_ReadAloud"])
     Button_ReadAloud.onclick = function()
     {
-        // ...
+        // sudah diimplement pake react di titlebar.tsx
     }
 else
     Button_CodeWithCodi.onclick = function()
@@ -47,7 +56,7 @@ else
             if (Grid_Assistant.classList.contains("listening") == false)
                 CodiAssistant_Update("listening");
             else
-                CodiAssistant_Update("start");
+                StopRecognition();
         }
 
         Button_ExitAssistant.onclick = CodiAssistant_Close;
@@ -77,8 +86,11 @@ function CodiAssistant_Update(type = "initial", action = "", phrase = "", option
     elem_phrase.innerText = phrase;
     elem_options.innerHTML = "";
 
+    if(type !== "listening"){FlushRecognition()}
+
     if (type == "start")
     {
+        FlushRecognition()
         elem_action.innerText = "Klik tombol mikrofon atau tombol mulai";
         elem_button.innerText = "Mulai";
         elem_orsay.innerText = "\"Codi mulai\" untuk mulai";
@@ -89,6 +101,7 @@ function CodiAssistant_Update(type = "initial", action = "", phrase = "", option
     }
     else if (type == "listening")
     {
+        if(!isRecording){StartRecognition("id-ID")}
         Grid_Assistant.classList.add("listening");
         elem_action.innerText = "Mulai bicara...";
         elem_button.innerText = "Batal";
@@ -114,6 +127,7 @@ function CodiAssistant_Update(type = "initial", action = "", phrase = "", option
 
         for (let option of options)
         {
+            console.log(option)
             let huruf = String.fromCharCode(65 + index);
             let element = document.createElement("div");
             element.classList.add("option");
@@ -150,14 +164,207 @@ function CodiAssistant_Open()
 {
     Grid_Assistant.style.top = "";
     Grid_Assistant.style.left = "";
-    CodiAssistant_Update("listening");
+    CodiAssistant_Update("start");
     Grid_Assistant.classList.add("opened");
 }
 
 function CodiAssistant_Close()
 {
     Grid_Assistant.classList.remove("opened");
+    FlushRecognition()
 }
+
+function StartRecognition(language){
+    if (recognition) {
+        try {
+            recognition.stop();
+        } catch(e) {
+            console.log("Error stopping existing recognition:", e);
+        }
+        setTimeout(() => {
+            initializeRecognition(language);
+        }, 100);
+    } else {
+        initializeRecognition(language);
+    }
+}
+
+function initializeRecognition(language) {
+    fullTranscript = "";
+    transcript = "";
+
+    isRecording = true;
+    recordingComplete = false;
+    isPaused = false;
+    
+    if (pauseTimeout) {
+        clearTimeout(pauseTimeout);
+        pauseTimeout = null;
+    }
+    
+    recognition = new window.webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = language;
+    
+    recognition.onresult = (event) => {
+        const currentTranscript = event.results[event.results.length - 1][0].transcript;
+        
+        if (event.results[event.results.length - 1].isFinal) {
+            fullTranscript += currentTranscript + " ";
+            transcript = fullTranscript.trim();
+            CodiAssistant_Update("listening", "", transcript);
+
+            if (pauseTimeout) {
+                clearTimeout(pauseTimeout);
+            }
+            
+            pauseTimeout = setTimeout(() => {
+                if (isRecording && !isPaused) {
+                    isPaused = true;
+                    try {
+                        StopRecognition()
+                    } catch(e) {
+                        console.error("Error stopping recognition for pause:", e);
+                    }
+            
+                } 
+            }, 5000); // stop jika 5 detik ybs. tidak ngomong
+        } else {
+            transcript = fullTranscript + currentTranscript;
+            CodiAssistant_Update("listening", "", transcript);
+        }
+    };
+
+    recognition.onend = () => {        
+        if (isRecording && !recordingComplete && !isPaused) {            
+            setTimeout(() => {
+                if (isRecording && !isPaused && !recordingComplete) {
+                    try {
+                        recognition.start();
+                    } catch(e) {
+                        console.error("Error restarting recognition after end:", e);
+                        setTimeout(() => {
+                            if (isRecording) initializeRecognition(language);
+                        }, 100);
+                    }
+                }
+            }, 500);
+        }
+    };
+
+    recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        if (event.error === 'network' || event.error === 'service-not-allowed' || event.error === 'no-speech') {
+            if (isRecording && !recordingComplete) {
+                setTimeout(() => {
+                    if (isRecording) initializeRecognition(language);
+                }, 500);
+            }
+        }
+    };
+
+    setTimeout(() => {
+        try {
+            // console.log("Starting recognition");
+            recognition.start();
+        } catch(e) {
+            console.error("Error in initial recognition start:", e);
+            // If start fails, wait and try completely reinitializing
+            setTimeout(() => {
+                if (isRecording) initializeRecognition(language);
+            }, 100);
+        }
+    }, 50);
+}
+
+function FlushRecognition(){
+    isRecording = false
+    recordingComplete = false
+    if (recognition) {
+        recognition.stop();
+    }
+    
+    if (pauseTimeout) {
+        clearTimeout(pauseTimeout);
+    }
+}
+
+async function StopRecognition(){
+    isRecording = false
+    recordingComplete = true
+    if (recognition) {
+        recognition.stop();
+    }
+    
+    if (pauseTimeout) {
+        clearTimeout(pauseTimeout);
+    }
+    
+    console.log(transcript) // Check transcription result
+    if (transcript){
+        sendToGemini()
+        .then(result => {
+            console.log(result);
+            tempGeminiResult = result
+            
+            const snippet = result.snippet
+            const description = result.desc
+
+            let resultList = []
+            let code = document.querySelector('.root .main')?.textContent || ''
+
+            for (let i = 0; i < snippet.length; i++) {
+                let text = snippet[i]
+                let changes = result[i]
+                let done = description[i]
+
+                function modifyCode(code, changes){
+                    // yet to implement (next commit)
+                    return ""
+                }
+                let newJson = {
+                    text: text,
+                    action: modifyCode,
+                    done: done
+                }
+                console.log(newJson)
+                resultList.push(newJson)
+            }
+            CodiAssistant_Update("choose", "", transcript, resultList)
+        })
+
+    } else{
+        CodiAssistant_Update("start")
+    }
+}
+
+const sendToGemini = async () => {
+    const data = new FormData();
+    data.append('audioTranscript', transcript);
+    data.append('codeToModify', document.querySelector('.root .main')?.textContent || '');
+
+    try {
+        const response = await fetch('/api/gemineh', {
+            method: 'POST',
+            body: data
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData?.error || `HTTP Error: ${response.status}`);
+        }
+
+        const jsonData = await response.json();
+        return jsonData?.data || null;
+
+    } catch (error) {
+        console.error('Error saat mengirim ke Gemini:', error.message);
+        return null;
+    }
+};
+
+
 
 window.addEventListener("keydown", function(event)
 {

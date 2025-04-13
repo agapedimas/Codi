@@ -61,7 +61,7 @@ export default function Titlebar({ type }: { type: string }) {
         utterance.rate = 0.95;   // Slightly slower for clarity
         utterance.volume = 0.75;   
         utterance.lang = 'id-ID'; 
-
+        synthesisRef.current.speaking ? synthesisRef.current.cancel(): ""
         synthesisRef.current.speak(utterance);
     }
 

@@ -9,7 +9,7 @@ export async function POST(request) {
         const pageContent = formData.get("pageContent");
 
         const generationConfig = {
-            temperature: 1,
+            temperature: 0.2,
             topP: 1,
             topK: 40,
             maxOutputTokens: 2048,
@@ -35,7 +35,7 @@ export async function POST(request) {
                                 - Jangan pernah berikan emoji atau semacamnya, hanya murni teks saja
                                 - Buat narasi singkat dan jelas dari konten halaman
                                 - Fokus pada informasi paling penting
-                                - Gunakan bahasa yang natural, komunikatif, dan santai
+                                - Gunakan bahasa yang natural dan komunikatif, namun tetap formal
                                 - Jawaban maksimal 2–4 kalimat
                                 - Hanya kembalikan narasi, tanpa penjelasan tambahan
                             `.trim()
