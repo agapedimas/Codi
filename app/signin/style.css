@@ -26,6 +26,7 @@
     }
         .panel img
         {
+            width: auto;
             height: 1.55em;
         }
         .panel .title

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function accessibility(type = "readAloud")
 {
     if (type == "codeWith")
@@ -20,7 +22,7 @@ const element = function(type: string)
 {
     return (
         <header className="titlebar" suppressHydrationWarning>
-            <img className="icon" src="/favicon.ico"/>
+            <Image className="icon" src="/favicon.ico" alt="Logo Codi" width={16} height={16}/>
             <span className="name">Codi</span>
             <div className="controls">
                 <div className="content">
@@ -35,7 +37,7 @@ const element = function(type: string)
                         { accessibility(type) }
                     </div>
                     <div className="profile" id="Image_Profile">
-                        <img src="/avatar.webp"/>
+                        <Image src="/avatar.webp" alt="Avatar pengguna" width={30} height={30}/>
                     </div>
                 </div>
             </div>

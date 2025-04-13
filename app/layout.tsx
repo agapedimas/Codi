@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./styles.css";
 
 export const metadata: Metadata = 
@@ -21,14 +20,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 	return (
 		<html lang="id" suppressHydrationWarning={true}>
 			<head>
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-				<script src="https://assets.agapedimas.com/ui/v3/head.js"></script>
-				<script src="https://assets.agapedimas.com/ui/v3/components.js"></script>
-				<script src="https://assets.agapedimas.com/ui/v3/style.js"></script>
-				<script src="https://assets.agapedimas.com/ui/v3/events.js"></script>
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/>
+				<script src="https://assets.agapedimas.com/ui/v3/head.js"/>
+				<script src="https://assets.agapedimas.com/ui/v3/components.js"/>
+				<script src="https://assets.agapedimas.com/ui/v3/style.js"/>
+				<script src="https://assets.agapedimas.com/ui/v3/events.js"/>
 			</head>
 			<body>
-				<script src="https://assets.agapedimas.com/ui/v3/main.js"></script>
+				<script src="https://assets.agapedimas.com/ui/v3/main.js"/>
 				{children}
 			</body>
 		</html>

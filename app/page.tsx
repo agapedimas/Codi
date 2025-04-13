@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { Fragment } from "react";
+import Image from "next/image";
 import "./landing.css";
 import "./layout";
 
@@ -27,7 +27,7 @@ const element = (
 <Fragment>
     <header id="Header" className="titlebar">
         <div className="logo">
-            <img src="/favicon.ico"/>
+            <Image src="/favicon.ico" alt="Logo Codi" width={128} height={128}/>
             <span>Codi</span>
         </div>
         <nav>
@@ -84,7 +84,7 @@ const element = (
                                 <div ad-name={feature.id} key={feature.id}>
                                     <div className="name">{feature.name}</div>
                                     <div className="desc">{feature.desc}</div>
-                                    <img src={"/assets/features/" + feature.id + ".png"}/>
+                                    <Image src={"/assets/features/" + feature.id + ".png"} alt={"Illustrasi " + feature.name } width={900} height={720}/>
                                 </div>
                             ))
                         }
@@ -115,7 +115,7 @@ const element = (
                 </div>
             </section>
         </div>
-        <script src="./landing.js"></script>
+        <script src="./landing.js"/>
     </section>
 </Fragment>
 )

@@ -1,13 +1,14 @@
 import { Metadata } from "next";
 import { Fragment } from "react";
+import Image from "next/image";
 import "./style.css";
 
 const element = (
 <Fragment>
     <section className="root">
         <div className="main">
-            <div className="panel" theme="light">
-                <img src="/assets/logo_text.png "/>
+            <div className="panel" ad-theme="light">
+                <Image src="/assets/logo_text.png" alt="Logo Codi" width={640} height={190}/>
                 <div className="title">Masuk ke Codi</div>
                 <div className="subtitle">Masuk untuk mengakses platform belajar pemrograman untuk semua.</div>
                 <div className="inputs">
@@ -42,7 +43,7 @@ const element = (
                 </div>
             </div>
         </div>
-        <script src="./signin.js"></script>
+        <script src="./signin.js"/>
     </section>
 </Fragment>
 )

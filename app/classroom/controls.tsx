@@ -1,4 +1,5 @@
 'use client';
+import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 
 const element = (
@@ -6,10 +7,10 @@ const element = (
         <div className="popover" id="PopOver_Profile">
             <div className="content">
                 <div className="profile">
-                    <img src="/avatar.webp"/>
+                    <Image src="/avatar.webp" alt="Avatar Pengguna" width={50} height={50}/>
                     <div className="info">
                         <span className="name">User</span>
-                        <span className="description">Platinum member</span>
+                        <span className="description">Member platinum</span>
                         <button className="plain critical" id="Button_SignOut">Keluar</button>
                     </div>
                 </div>
@@ -60,7 +61,7 @@ const element = (
                 </div>
                 <div className="options">
                     <span>Mana yang ingin anda pilih?</span>
-                    <span className="desc">Sebut salah satu huruf atau bilang "Codi lagi" untuk opsi lainnya. Untuk geser ke kanan atau kiri, bilang "Codi kanan/kiri".</span>
+                    <span className="desc">Sebut salah satu huruf atau bilang &quot;Codi lagi&quot; untuk opsi lainnya. Untuk geser ke kanan atau kiri, bilang &quot;Codi kanan/kiri&quot;.</span>
                     <div className="lists"></div>
                 </div>
                 <div className="button">

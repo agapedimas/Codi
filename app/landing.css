@@ -27,6 +27,7 @@ header.titlebar
         img
         {
             aspect-ratio: 1;
+            width: auto;
             height: 2rem;
         }
         span
@@ -250,6 +251,7 @@ header.titlebar.scroll:after
                     object-fit: cover;
                     object-position: left bottom;
                     max-width: 535px;
+                    height: auto;
                 }
             }
 
