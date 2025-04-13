@@ -1,10 +1,13 @@
 "use client"
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-export default function Titlebar() { 
-    const [summary, setSummary] = useState<string>("")
+export default function Titlebar({ type }: { type: string }) { 
     const synthesisRef = useRef<any>(null);
+
+    useEffect(() => {
+        synthesisRef.current = window.speechSynthesis;
+    }, []);
 
     const parseMeaning = async () =>{
         try{
@@ -59,12 +62,27 @@ export default function Titlebar() {
         utterance.volume = 0.75;   
         utterance.lang = 'id-ID'; 
 
-        synthesisRef.current = window.speechSynthesis;
-
         synthesisRef.current.speak(utterance);
     }
 
-    const element = (
+    const accessibility = (type = "readAloud") => {
+        if (type == "codeWith")
+            return (
+                <button className="accent" id="Button_CodeWithCodi" suppressHydrationWarning>
+                    <span className="icon">&#xf59c;</span>
+                    <span>Kode dengan Codi</span>
+                </button>
+            )
+        else
+            return (
+                <button className="accent" id="Button_ReadAloud" suppressHydrationWarning>
+                    <span className="icon">&#xfb58;</span>
+                    <span>Bacakan</span>
+                </button>
+        )
+    }
+
+    return (
         <header className="titlebar" suppressHydrationWarning>
             <img className="icon" src="/favicon.ico"/>
             <span className="name">Codi</span>
@@ -82,6 +100,8 @@ export default function Titlebar() {
                             <span className="icon">&#xfb58;</span>
                             <span>Bacakan</span>
                         </button>
+                    <div className="accessibility" suppressHydrationWarning> 
+                        { accessibility(type) }
                     </div>
                     <div className="profile" id="Image_Profile">
                         <img src="/avatar.webp"/>
@@ -89,6 +109,5 @@ export default function Titlebar() {
                 </div>
             </div>
         </header>  
-    );
-    return element 
+    )
 }
