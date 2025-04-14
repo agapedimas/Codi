@@ -77,7 +77,7 @@ export default async function Quiz({ topic, number }: { topic: string, number: n
                     </button>
                     <div className="phrase"></div>
                 </div>
-                <div className="submit">
+                <div className="submit" suppressHydrationWarning>
                     <div className="desc">Katakan "Codi submit" untuk mengumpulkan jawaban</div>
                     <button className="accent" id="Button_SubmitQuiz" disabled suppressHydrationWarning>
                         <div className="progressring" ad-abortstyle="true">

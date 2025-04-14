@@ -10,6 +10,109 @@ function Quiz_ChooseOption(option)
     Button_SubmitQuiz.disabled = false;
 }
 
+// init global
+
+var recognitionQuiz = null;
+StartRecogQuiz()
+
+function StartRecogQuiz(language='id-ID'){
+    if (recognitionQuiz) {
+        try {
+            recognitionQuiz.stop();
+        } catch(e) {
+            console.log("Error stopping existing recognition:", e);
+        }
+        setTimeout(() => {
+            initRecognitionQuiz(language);
+        }, 100);
+    } else {
+        initRecognitionQuiz(language);
+    }
+}
+
+function initRecognitionQuiz(language){
+    pauseTimeout = null
+    fullTranscript = ""
+    recognitionQuiz = new window.webkitSpeechRecognition();
+    console.log(recognitionQuiz)
+    recognitionQuiz.continuous = true;
+    recognitionQuiz.interimResults = true;
+    recognitionQuiz.lang = language;
+
+    recognitionQuiz.onresult = (event) => {
+        // console.log(event.results)
+        const currentTranscript = event.results[event.results.length - 1][0].transcript;
+        
+        if (event.results[event.results.length - 1].isFinal) {
+            fullTranscript += currentTranscript;
+            transcript = fullTranscript.trim();
+            CodiAssistant_QuizUpdate("listening", transcript);
+
+            if (pauseTimeout) {
+                clearTimeout(pauseTimeout);
+            }
+
+            pauseTimeout = setTimeout(() => {
+                console.log("parsing actions...")
+                const action = targetAction(fullTranscript)
+                if(action){
+                    Quiz_ChooseOption(action)
+                }
+                fullTranscript = ""
+                CodiAssistant_QuizUpdate("idle", transcript);
+            }, 300);
+        } else {
+            transcript = currentTranscript;
+            CodiAssistant_QuizUpdate("listening", transcript);
+        }
+    };
+
+    recognitionQuiz.onend = () => {     
+        if(recognitionQuiz){
+            recognitionQuiz.stop()
+        }
+        initRecognitionQuiz()
+    }
+
+    recognitionQuiz.onerror = (event) =>{
+        if (event.error === 'network' || event.error === 'service-not-allowed' || event.error === 'no-speech') {
+            console.error("error")
+            if(recognitionQuiz){
+                recognitionQuiz.stop()
+            }
+            initRecognitionQuiz()
+        }
+    }
+
+    recognitionQuiz.start()
+}
+
+function targetAction(text) {
+    const words = text.toLowerCase().split(/\s+/);
+    console.log(words)
+
+    if (words.includes('submit') && !Button_SubmitQuiz.disabled){
+        submitQuiz()
+        return ""
+    }
+    else if(text.includes('coba lagi') ){
+        cobaLagi()
+        return ""
+    }else if((words.includes("lanjut") || words.includes("berikutnya")) && ("Button_QuizNext" in window)){
+        nextQuestion()
+    } 
+    else if(words.includes("done") && ("Button_QuizDone" in window)){
+        doneQuiz()
+    }
+    else{
+        const choices = ['a', 'b', 'c', 'd'];
+        const found = choices.find(choice => words.includes(choice));
+        if(found){
+            return found.toUpperCase()
+        }
+    }
+}
+
 CodiAssistant_Status = "idle";
 function CodiAssistant_QuizUpdate(type = "idle", phrase = "", action = new Function())
 {
@@ -26,6 +129,7 @@ function CodiAssistant_QuizUpdate(type = "idle", phrase = "", action = new Funct
     {
         Button_MicQuiz.classList.add("listening");
         CodiAssistant_Status = "listening";
+        elem_phrase.innerText = phrase;
     }
     else if (type == "done")
     {
@@ -35,7 +139,9 @@ function CodiAssistant_QuizUpdate(type = "idle", phrase = "", action = new Funct
     }
 }
 
-Button_SubmitQuiz.onclick = async function()
+Button_SubmitQuiz.onclick = submitQuiz
+
+async function submitQuiz()
 {
     const url = new URL(window.location.href);
     const paths = url.pathname.split("/");
@@ -83,13 +189,13 @@ Button_SubmitQuiz.onclick = async function()
     }
 }
 
-Button_MicQuiz.onclick = function()
-{
-    if (CodiAssistant_Status == "idle")
-        CodiAssistant_QuizUpdate("listening");
-    else
-        CodiAssistant_QuizUpdate("idle");
-}
+// Button_MicQuiz.onclick = function()
+// {
+//     if (CodiAssistant_Status == "idle")
+//         CodiAssistant_QuizUpdate("listening");
+//     else
+//         CodiAssistant_QuizUpdate("idle");
+// }
 
 $("#Sheet_Quiz > .dim").on("mousedown", function()
 {
@@ -101,13 +207,16 @@ $("#Sheet_Quiz > .control > .close").on("click", function()
 })
 
 if ("Button_QuizDone" in window)
-Button_QuizDone.onclick = function()
+Button_QuizDone.onclick = doneQuiz
+
+function doneQuiz()
 {
     window.location.href = "/classroom/courses/";
 }
 
 if ("Button_QuizNext" in window)
-Button_QuizNext.onclick = function()
+Button_QuizNext.onclick = nextQuestion
+function nextQuestion()
 {
     const url = new URL(window.location.href);
     const paths = url.pathname.split("/");
@@ -118,7 +227,9 @@ Button_QuizNext.onclick = function()
     window.location.href = url.href;
 }
 
-Button_QuizTryagain.onclick = function()
+Button_QuizTryagain.onclick = cobaLagi()
+
+function cobaLagi()
 {
     Components.Sheet.Close(Sheet_Quiz);
 }
