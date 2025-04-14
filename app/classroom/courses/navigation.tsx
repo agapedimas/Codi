@@ -52,11 +52,12 @@ export default function Menu_Courses() {
               <span>{course.nama}</span>
             </a>
             {course.modules.map((modul) => {
-              // Custom path for course 1 module 2
-              const path =
-                course.id === 1 && modul.id === 2
-                  ? "/classroom/courses/java/quiz"
-                  : `/classroom/courses/${course.id}/${modul.id}`;
+              let path = `/classroom/courses/${course.id}/${modul.id}`;
+              if (course.id === 1 && modul.id === 2) {
+                path = "/classroom/courses/java/quiz";
+              } else if (course.id === 1 && modul.id === 1) {
+                path = "/classroom/courses/java-101";
+              }
 
               return (
                 <a
