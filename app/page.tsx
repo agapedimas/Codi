@@ -257,7 +257,7 @@ const element = (
                                     <div className="features">
                                         {
                                             data.features.map(feature => (
-                                                <div>{feature}</div>
+                                                <div key={Math.random()}>{feature}</div>
                                             ))
                                         }
                                     </div>
