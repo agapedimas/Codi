@@ -1,14 +1,11 @@
-// src/app/api/courses/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: NextRequest) {
   try {
-    console.log(params.id)
-    const courseId = params.id;
+    // Extract courseId from URL path
+    const segments = req.nextUrl.pathname.split('/');
+    const courseId = segments[segments.length - 1]; // should be the dynamic [id]
 
     // Get course details
     const [courseRows] = await db.query(
@@ -52,13 +49,13 @@ export async function GET(
 }
 
 export async function POST(req: NextRequest) {
-	const body = await req.json()
-	const { userId, courseId } = body
+  const body = await req.json();
+  const { userId, courseId } = body;
 
-	await db.query(
-		"INSERT INTO Accounts_Course (id_user, id_course) VALUES (?, ?)",
-		[userId, courseId]
-	)
+  await db.query(
+    "INSERT INTO Accounts_Course (id_user, id_course) VALUES (?, ?)",
+    [userId, courseId]
+  );
 
-	return NextResponse.json({ success: true })
+  return NextResponse.json({ success: true });
 }

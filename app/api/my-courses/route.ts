@@ -1,8 +1,8 @@
 // app/api/my-courses/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Hardcoded userId as requested
     const userId = 66;
@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
       : [];
 
     // Debug log to see what we're getting
-    console.log("First row modules type:", typeof rows[0]?.modules);
+    // console.log("First row modules type:", typeof rows[0]?.modules);
 
     return NextResponse.json(result);
   } catch (err) {
