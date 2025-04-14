@@ -16,8 +16,9 @@ export const metadata: Metadata =
 };
 
 type slugParam = Promise<{ slug: string[] }>;
+type searchParam = Promise<{ q: string }>; 
 
-export default async function CoursePage(props: { params: slugParam, searchParams: { q: string } }) 
+export default async function CoursePage(props: { params: slugParam, searchParams: searchParam }) 
 {
 	const { slug } = await props.params;
 	const { q } = await props.searchParams;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { java } from "@codemirror/lang-java";
 
@@ -12,7 +12,7 @@ type Props = {
 
 declare global {
 	interface Window {
-		modifyCodeInEditor: any
+		modifyCodeInEditor: (any)
 	}
 }
 
@@ -32,8 +32,8 @@ function CodeEditorBlock({ defaultCode }: Props) {
 		}
 	*/
 	const makeChanges = (modifications: any) =>{
-		let tempCode = code
-		let codeList = tempCode.split("\n")
+		const tempCode = code
+		const codeList = tempCode.split("\n")
 		console.log("BEFORE")
 		console.log(codeList.join("\n"))
 		//Phase 1: Removal
@@ -79,7 +79,7 @@ function CodeEditorBlock({ defaultCode }: Props) {
 		return () => {
 			delete window.modifyCodeInEditor;
 			}
-		}, []);
+		});
 	
 	return (
 		<section className="editor">

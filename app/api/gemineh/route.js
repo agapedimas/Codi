@@ -2,7 +2,6 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const modelName = process.env.MODEL_ID;
-const language = 'Indonesia';
 
 export async function POST(request) {
     try {
@@ -163,10 +162,9 @@ export async function POST(request) {
                 success: true
             });
         } catch (parseError) {
-            // console.error("JSON parsing error:", parseError);
             return Response.json({
                 text: response.text(),
-                error: "Failed to parse JSON response",
+                error: "Failed to parse JSON response " + parseError,
                 success: false
             }, { status: 422 });
         }

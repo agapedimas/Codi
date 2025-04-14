@@ -7,7 +7,7 @@ export default async function Quiz({ topic, number }: { topic: string, number: n
     const content = await getQuizContent(topic) || [];
     const data = content[number];
     let answerIndex = 0;
-    let lastQuestion = number == content.length - 1;
+    const lastQuestion = number == content.length - 1;
     
     if (data == null)
     {
@@ -60,7 +60,7 @@ export default async function Quiz({ topic, number }: { topic: string, number: n
                 <div className="options">
                     { 
                         data.answer.map((answer: string) => {
-                            let huruf = String.fromCharCode(65 + answerIndex);
+                            const huruf = String.fromCharCode(65 + answerIndex);
                             answerIndex++;
                             return (
                                 <div className="answer" key={answerIndex} ad-option={huruf} ad-index={answerIndex - 1} suppressHydrationWarning>{ answer }</div>
