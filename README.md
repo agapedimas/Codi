@@ -9,6 +9,8 @@
 - Vico Pratama (6182201011)
 - Agape Dimas (6182401062)
 
+Open https://agapedimas.com/r/codi untuk melihat produk akhirnya.
+
 ## About Codi
 
 Codi adalah platform pembelajaran pemrograman yang dirancang khusus untuk individu dengan disabilitas motorik, menggunakan teknologi eye-tracking (pelacakan mata) dan voice command (perintah suara) untuk memungkinkan pengguna menulis dan menjalankan kode tanpa perlu menggunakan keyboard atau mouse konvensional.
