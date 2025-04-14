@@ -322,7 +322,7 @@ header.titlebar.scroll:after
                     text-align: right;
                     margin-top: 50px;
                     font-size: 50px;
-                    color: var(--foreground-description);
+                    color: var(--overlay-3);
                 }
             }
 
@@ -336,8 +336,7 @@ header.titlebar.scroll:after
                 width: 1.5em;
                 height: auto;
                 aspect-ratio: 1;
-                background: var(--foreground-description);
-                color: var(--overlay-7);
+                background: var(--overlay-5);
                 border-radius: 100%;
                 font-family: var(--font-bold);
                 font-size: 1.15em;
@@ -385,7 +384,7 @@ header.titlebar.scroll:after
                     font-size: 1.25em;
                     line-height: 1em;
                     font-family: var(--font-icon);
-                    opacity: 0.2;
+                    color: var(--overlay-3);
                 }
                 .review::after
                 {
@@ -460,7 +459,7 @@ header.titlebar.scroll:after
                 {
                     content: " / bulan";
                     font-size: 0.65em;
-                    color: var(--foreground-description);
+                    color: var(--overlay-2);
                 }
 
                 .features
