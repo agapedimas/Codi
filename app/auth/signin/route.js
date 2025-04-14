@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { createSession } from "@/lib/session";
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {
@@ -22,6 +23,8 @@ export async function POST(req) {
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid)
             return NextResponse.json({ error: "Password salah" }, { status: 401 });
+
+        await createSession(user.id);
 
         // TODO: generate token atau session (bisa next-auth, jwt, dll)
         return NextResponse.json(
