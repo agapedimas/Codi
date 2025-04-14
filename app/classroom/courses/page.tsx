@@ -39,29 +39,10 @@ const checkEnrollment = async (courseId: number): Promise<boolean> => {
   return data.enrolled; // asumsi API mengembalikan { enrolled: true/false }
 };
 
-const enrollInCourse = async (courseId: number) => {
-  try {
-    const res = await fetch('/api/accounts-course', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId, courseId }),
-    });
-
-    if (!res.ok) throw new Error('Failed to enroll in course');
-
-    alert('Berhasil mendaftar ke course!');
-    window.location.reload(); // reload untuk update
-  } catch (err) {
-    alert('Gagal mendaftar course.');
-  }
-};
-
-
 export default function CourseListingPage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [enrollmentStatus, setEnrollmentStatus] = useState<{ [courseId: number]: boolean }>({});
 
 useEffect(() => {
   const fetchEnrollmentStatus = async () => {
@@ -70,7 +51,6 @@ useEffect(() => {
       const enrolled = await checkEnrollment(course.id);
       statusMap[course.id] = enrolled;
     }
-    setEnrollmentStatus(statusMap);
   };
 
   if (courses.length > 0) {

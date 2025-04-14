@@ -1,8 +1,8 @@
 // src/app/api/courses/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     // Get all courses with module count
     const [coursesWithModuleCounts] = await db.query(`
