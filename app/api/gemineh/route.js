@@ -29,9 +29,47 @@ export async function POST(request) {
                 Your response must follow this three-phase modification structure:
                 
                 1. REMOVAL PHASE: Specify line numbers to remove (0-indexed)
+                for example
                 2. CHANGE PHASE: Modify existing lines with new code
                 3. ADD PHASE: Add new lines of code at specific positions
                 
+                # EXAMPLE:
+
+                When removing, you would specify the 0-indexed line numbers to delete:
+                "remove": [2, 3, 4]  // Removes lines 2, 3, and 4 from the original code
+
+                When changing existing lines, you provide the 0-indexed line numbers as the key and new code as the value:
+                "change": {
+                "0": "function optimizedCalculation(values) {",
+                "5": "  return values.reduce((sum, val) => sum + val, 0);"
+                }
+
+                When adding new lines, specify where to insert them (after the given 0-indexed line numbers):
+                "add": {
+                "1": "  // Optimized implementation",
+                "6": "  console.log('Calculation complete');"
+                }
+
+
+                Let me provide a few more specific cases:
+                Case 1: Fixing a bug in a simple function
+                "remove": [],
+                "change": {
+                "4": "  if (denominator === 0) return null;",
+                "5": "  return numerator / denominator;"
+                },
+                "add": {
+                "3": "  // Check for division by zero"
+                }
+                Case 2: Complete rewrite of a function
+                "remove": [1, 2, 3, 4, 5, 6, 7],
+                "change": {
+                "0": "function betterName(arr) {"
+                },
+                "add": {
+                "0": "  return arr.filter(item => item > 0).map(item => item * 2);"
+                }
+
                 # FINAL STRUCTURE:
                 {
                 "suggestions": [
@@ -67,6 +105,7 @@ export async function POST(request) {
                 - GIVE DESCRIPTION in INDONESIAN LANGUAGE, explain shortly and concisely IN MAXIMUM OF 10 WORDS
                 - Your ENTIRE response must be ONLY valid, parseable JSON.
                 - DO NOT include explanations outside the JSON structure.
+                - Ketika ada promp untuk menghapus suatu baris, keluarkan parameter "remove" pada suggestion dengan valuenya adalah list baris yang ingin dihapus dengan indeks mulai dari 0
                 - Process modifications in order: first remove lines, then change existing lines, then add new lines.
                 - Line numbers are 0-indexed.
                 - Provide 1 to 4 different solutions when possible (TRY TO MAKE IT POSSIBLE).
@@ -89,6 +128,7 @@ export async function POST(request) {
             prompt += `CODE TO MODIFY:\n${codeToModify}\n\n`;
         }
 
+
         prompt += `Please return only the modified code suggestions as JSON with this structure, and provide the description with indonesian language:
         {
         "suggestions": [
@@ -96,14 +136,14 @@ export async function POST(request) {
             "snippet": "Brief code preview",
             "description": "What this solution does", //ALWAYS IMPLEMENT IN INDONESIAN LANGUAGE AND 12 WORDS MAXIMUM
             "modifications": {
-                "remove": [5, 6, 7],
+                "remove": [5, 6, 7], // gunakan nomor baris dalam konteks indeks yang mulai dari 0
                 "change": {
-                "2": "const x = 10;",
-                "8": "return result;"
+                "2": "const x = 10;", // gunakan nomor baris dalam konteks indeks yang mulai dari 0
+                "8": "return result;" // gunakan nomor baris dalam konteks indeks yang mulai dari 0
                 },
                 "add": {
-                "3": "const y = 20;",
-                "9": "console.log(result);"
+                "3": "const y = 20;", // gunakan nomor baris dalam konteks indeks yang mulai dari 0
+                "9": "console.log(result);" // gunakan nomor baris dalam konteks indeks yang mulai dari 0
                 }
             }
             }

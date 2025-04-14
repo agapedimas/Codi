@@ -48,7 +48,7 @@ function CodeEditorBlock({ defaultCode }: Props) {
 		if (modifications.change){
 			console.log("CHANGING")
 			for (const [key, value] of Object.entries(modifications.change)) {
-				const lineIndex = Number(key); // convert "2" -> 2
+				const lineIndex = Number(key)-1;// convert "2" -> 2
 				const newCode = value;
 				
 				codeList[lineIndex] = String(newCode);
@@ -63,7 +63,7 @@ function CodeEditorBlock({ defaultCode }: Props) {
 				.sort((a, b) => b[0] - a[0]); // sort descending
 
 			for (const [index, line] of insertions) {
-				codeList.splice(index-1, 0, line); // insert after the line
+				codeList.splice(index, 0, line); // insert after the line
 			}
 		}
 

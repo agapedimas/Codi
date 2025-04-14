@@ -352,7 +352,6 @@ const sendToGemini = async () => {
         return jsonData?.data || null;
 
     } catch (error) {
-        console.error('Error saat mengirim ke Gemini:', error.message);
         return null;
     }
 };

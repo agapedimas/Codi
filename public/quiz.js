@@ -98,10 +98,10 @@ function targetAction(text) {
     else if(text.includes('coba lagi') ){
         cobaLagi()
         return ""
-    }else if((words.includes("lanjut") || words.includes("berikutnya")) && ("Button_QuizNext" in window)){
+    }else if((words.includes("lanjut") || words.includes("berikutnya")) && ("Button_QuizNext" in window && Sheet_Quiz.classList.contains("opened"))){
         nextQuestion()
     } 
-    else if(words.includes("done") && ("Button_QuizDone" in window)){
+    else if(words.includes("done") || words.includes("selesai") && ("Button_QuizDone" in window) ){
         doneQuiz()
     }
     else{
