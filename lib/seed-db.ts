@@ -31,7 +31,7 @@ const seed = async () => {
     // Insert Course
     await db.query(`
       INSERT INTO Course (id, title, description, instructorName, instructorAvatar) VALUES 
-      (1, 'Pemrograman Web Dasar', 'Kursus ini dirancang khusus untuk membantu individu dengan disabilitas tangan belajar pemrograman web. Kami menggunakan pendekatan dan alat yang aksesibel untuk memastikan setiap peserta dapat mengikuti materi dengan nyaman.', 'Budi Santoso', '/api/placeholder/64/64'),
+      (1, 'Pemrograman Java', 'Kursus ini dirancang khusus untuk membantu individu dengan disabilitas tangan belajar pemrograman java. Kami menggunakan pendekatan dan alat yang aksesibel untuk memastikan setiap peserta dapat mengikuti materi dengan nyaman.', 'Budi Santoso', '/api/placeholder/64/64'),
       (2, 'Pemrograman Mobile untuk Disabilitas', 'Pelajari cara mengembangkan aplikasi mobile yang aksesibel dan inklusif. Kursus ini fokus pada teknik pemrograman yang dapat digunakan oleh individu dengan keterbatasan motorik.', 'Siti Rahayu', '/api/placeholder/64/64'),
       (3, 'Dasar-dasar Python', 'Belajar bahasa pemrograman Python yang mudah dipelajari dan digunakan. Kursus ini mengajarkan konsep dasar hingga menengah dengan pendekatan yang aksesibel.', 'Ahmad Hidayat', '/api/placeholder/64/64');
     `);
@@ -41,9 +41,8 @@ const seed = async () => {
     await db.query(`
       INSERT INTO Module (id, title, description, id_type_module, id_course, totalLessons, completedLessons, duration, image) VALUES 
       -- Modules for Web Programming Course
-      (1, 'HTML Dasar', 'Belajar struktur dasar dokumen web dan elemen HTML', 1, 1, 5, 0, '2 jam', '/api/placeholder/120/80'),
-      (2, 'HTML : Coding', 'Memahami cara memberikan style pada halaman web', 2, 1, 8, 0, '3 jam', '/api/placeholder/120/80'),
-      (3, 'Quiz HTML', 'Quiz HTML dan CSS', 3, 1, 3, 0, '2.5 jam', '/api/placeholder/120/80'),
+      (1, 'Java 101', 'Belajar struktur dasar dokumen web dan elemen HTML', 1, 1, 5, 0, '2 jam', '/api/placeholder/120/80'),
+      (2, 'Quiz Java', 'Memahami cara memberikan style pada halaman web', 3, 1, 8, 0, '3 jam', '/api/placeholder/120/80'),
 
       -- Modules for Mobile Programming Course
       (4, 'Pengenalan Mobile Development', 'Memahami prinsip dasar pengembangan aplikasi mobile', 1, 2, 4, 0, '1.5 jam', '/api/placeholder/120/80'),
