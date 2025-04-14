@@ -236,11 +236,6 @@ export async function POST(request) {
             const text = response.text();
             const parsed = JSON.parse(text);
         
-            // Verify the new format has at least the snippet array and one option
-            if (!Array.isArray(parsed.snippet) || (!parsed[0] && !parsed[1] && !parsed[2] && !parsed[3])) {
-                throw new Error("Invalid format: expected snippet array and at least one numeric option");
-            }
-        
             return Response.json({
                 data: parsed,
                 success: true

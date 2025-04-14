@@ -240,39 +240,34 @@ function initializeRecognition(language) {
         if (isRecording && !recordingComplete && !isPaused) {            
             setTimeout(() => {
                 if (isRecording && !isPaused && !recordingComplete) {
-                    try {
-                        recognition.stop();
-                        recognition.start();
-                    } catch(e) {
-                        console.error("Error restarting recognition after end:", e);
-                        setTimeout(() => {
-                            if (isRecording) initializeRecognition(language);
-                        }, 100);
+                    if(recognition){
+                        recognition.stop()
                     }
+                    initializeRecognition()
                 }
             }, 500);
         }
     };
-
+    
     recognition.onerror = (event) => {
-        console.error("Speech recognition error:", event.error);
         if (event.error === 'network' || event.error === 'service-not-allowed' || event.error === 'no-speech') {
+            console.error("error")
             if (isRecording && !recordingComplete) {
-                setTimeout(() => {
-                    if (isRecording) initializeRecognition(language);
-                }, 500);
+                if(recognition){
+                    recognition.stop()
+                }
+                setTimeout(() => recognition.start(), 500);
             }
         }
     };
-
+    
     setTimeout(() => {
         try {
-            // console.log("Starting recognition");
-            recognition.stop();
+            if(recognition){
+                recognition.stop()
+            }
             recognition.start();
         } catch(e) {
-            console.error("Error in initial recognition start:", e);
-            // If start fails, wait and try completely reinitializing
             setTimeout(() => {
                 if (isRecording) initializeRecognition(language);
             }, 100);
@@ -314,7 +309,7 @@ async function StopRecognition(){
             const description = result.desc
 
             let resultList = []
-            let code = document.querySelector('.root .main')?.textContent || ''
+            const code = document.querySelector('.root .main')?.textContent || ''
 
             if (snippet){
                 for (let i = 0; i < snippet.length; i++) {
@@ -322,7 +317,7 @@ async function StopRecognition(){
                     let changes = result[i]
                     let done = description[i]
     
-                    function modifyCode(code, changes){
+                    function modifyCode(changes){
                         // yet to implement (next commit)
                         return ""
                     }
