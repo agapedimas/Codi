@@ -16,6 +16,7 @@
     "@uiw/react-codemirror": "^4.23.10",
     "axios": "^1.8.4",
     "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
     "face-api.js": "^0.22.2",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.488.0",
