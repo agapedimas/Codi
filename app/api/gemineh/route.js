@@ -15,203 +15,66 @@ export async function POST(request) {
             topP: 1,
             topK: 40,
             maxOutputTokens: 8192,
-            responseMimeType: "application/json",
-            responseSchema: {
-                type: "object",
-                properties: {
-                    snippet: {
-                        type: "array",
-                        items: { type: "string" },
-                        description: "Preview of all suggested code options"
-                    },
-                    desc: {
-                        type: "array",
-                        items: { type: "string" },
-                        description: "Description of all suggested code options"
-                    },
-                    0: {
-                        type: "object",
-                        properties: {
-                            changes: {
-                                type: "object",
-                                properties: {
-                                    removed: {
-                                        type: "object",
-                                        properties: {
-                                            lines: {
-                                                type: "array",
-                                                items: { type: "number" }
-                                            }
-                                        },
-                                        required: ["lines"]
-                                    },
-                                    added: {
-                                        type: "object",
-                                        properties: {
-                                            codes: {
-                                                type: "array",
-                                                items: { type: "string" }
-                                            }
-                                        },
-                                        required: ["codes"]
-                                    }
-                                },
-                                required: ["removed", "added"]
-                            }
-                        },
-                        required: ["changes"]
-                    },
-                    1: {
-                        type: "object",
-                        properties: {
-                            changes: {
-                                type: "object",
-                                properties: {
-                                    removed: {
-                                        type: "object",
-                                        properties: {
-                                            lines: {
-                                                type: "array",
-                                                items: { type: "number" }
-                                            }
-                                        },
-                                        required: ["lines"]
-                                    },
-                                    added: {
-                                        type: "object",
-                                        properties: {
-                                            codes: {
-                                                type: "array",
-                                                items: { type: "string" }
-                                            }
-                                        },
-                                        required: ["codes"]
-                                    }
-                                },
-                                required: ["removed", "added"]
-                            }
-                        },
-                        required: ["changes"]
-                    },
-                    2: {
-                        type: "object",
-                        properties: {
-                            changes: {
-                                type: "object",
-                                properties: {
-                                    removed: {
-                                        type: "object",
-                                        properties: {
-                                            lines: {
-                                                type: "array",
-                                                items: { type: "number" }
-                                            }
-                                        },
-                                        required: ["lines"]
-                                    },
-                                    added: {
-                                        type: "object",
-                                        properties: {
-                                            codes: {
-                                                type: "array",
-                                                items: { type: "string" }
-                                            }
-                                        },
-                                        required: ["codes"]
-                                    }
-                                },
-                                required: ["removed", "added"]
-                            }
-                        },
-                        required: ["changes"]
-                    },
-                    3: {
-                        type: "object",
-                        properties: {
-                            changes: {
-                                type: "object",
-                                properties: {
-                                    removed: {
-                                        type: "object",
-                                        properties: {
-                                            lines: {
-                                                type: "array",
-                                                items: { type: "number" }
-                                            }
-                                        },
-                                        required: ["lines"]
-                                    },
-                                    added: {
-                                        type: "object",
-                                        properties: {
-                                            codes: {
-                                                type: "array",
-                                                items: { type: "string" }
-                                            }
-                                        },
-                                        required: ["codes"]
-                                    }
-                                },
-                                required: ["removed", "added"]
-                            }
-                        },
-                        required: ["changes"]
-                    }
-                },
-                required: ["snippet"]
-            }
+            responseMimeType: "application/json"
         };
-
+            
         const model = ai.getGenerativeModel({
             model: modelName,
             generationConfig,
             systemInstruction: {
-                role: "You are CodeAssist, a specialized coding assistant that converts verbal programming concepts into executable code, with outputs in strict JSON format only.",
-                content: `
-                    # CRITICAL: OUTPUT FORMAT REQUIREMENTS
-                    LinesToBeRemoved = {"removed": {"lines":[3,4,5]}}
-                    CodesToBeAdded = {"added": {"codes":["code_line_1", "code_line_2", ...]}}
-                    Snippet = giving simple preview of all suggested code
-
-                    # FINAL STRUCTURE:
+            role: "You are CodeAssist, a specialized coding assistant that converts verbal programming concepts into executable code, with outputs in strict JSON format only.",
+            content: `
+                # CRITICAL: OUTPUT FORMAT REQUIREMENTS
+                
+                Your response must follow this three-phase modification structure:
+                
+                1. REMOVAL PHASE: Specify line numbers to remove (0-indexed)
+                2. CHANGE PHASE: Modify existing lines with new code
+                3. ADD PHASE: Add new lines of code at specific positions
+                
+                # FINAL STRUCTURE:
+                {
+                "suggestions": [
                     {
-                    "snippet": ["suggestion1", "suggestion2", "suggestion3", ...],
-                    "desc": ["description1", "description2", "description3", ...],
-                    "0": {
-                        "changes": {
-                        "removed": { "lines": [ ... ] },
-                        "added": { "codes": [ ... ] }
-                        }
-                    },
-                    "1": {
-                        "changes": {
-                        "removed": { "lines": [ ... ] },
-                        "added": { "codes": [ ... ] }
-                        }
-                    },
-                    "2": {
-                        "changes": {
-                        "removed": { "lines": [ ... ] },
-                        "added": { "codes": [ ... ] }
-                        }
-                    },
-                    "3": {
-                        "changes": {
-                        "removed": { "lines": [ ... ] },
-                        "added": { "codes": [ ... ] }
+                    "snippet": "Brief preview of the solution",
+                    "description": "Detailed explanation of the approach",
+                    "modifications": {
+                        "remove": [5, 6, 7],      // Phase 1: Lines to remove (0-indexed)
+                        "change": {               // Phase 2: Lines to modify
+                        "2": "const x = 10;",
+                        "8": "return result;"
+                        },
+                        "add": {                  // Phase 3: Lines to add
+                        "3": "const y = 20;",   // Add after line 3
+                        "9": "console.log(result);"
                         }
                     }
+                    },
+                    {
+                    "snippet": "Alternative solution approach",
+                    "description": "Different approach to solve the problem",
+                    "modifications": {
+                        "remove": [],
+                        "change": {},
+                        "add": {}
                     }
-
-                    # RULES:
-                    - Your ENTIRE response must be ONLY valid, parseable JSON.
-                    - DO NOT explain or wrap the output in any text.
-                    - All snippets should be combined in one "snippet" array at the top level.
-                    - Use clear indentation.
-                    - All modifications must be listed in the "changes" section.
-                    - Use numeric keys (0, 1, 2, 3) for different options.
-                    - Provide up to 4 different options when possible.
-                `
+                    }
+                    // Up to 4 suggestions
+                ]
+                }
+                
+                # RULES:
+                - GIVE DESCRIPTION in INDONESIAN LANGUAGE, explain shortly and concisely IN MAXIMUM OF 10 WORDS
+                - Your ENTIRE response must be ONLY valid, parseable JSON.
+                - DO NOT include explanations outside the JSON structure.
+                - Process modifications in order: first remove lines, then change existing lines, then add new lines.
+                - Line numbers are 0-indexed.
+                - Provide 1 to 4 different solutions when possible (TRY TO MAKE IT POSSIBLE).
+                - Each suggestion must include all three phases (remove, change, add) even if some are empty arrays/objects.
+                - Always format the response with the exact structure shown above.
+                - The "change" and "add" objects should have string keys (line numbers) and string values (code content).
+                - When deleting all rows, try to remember the context how many row there are in the code by counting the backslash-n character
+            `
             }
         });
 
@@ -226,7 +89,26 @@ export async function POST(request) {
             prompt += `CODE TO MODIFY:\n${codeToModify}\n\n`;
         }
 
-        prompt += `Please return only the modified code suggestions as JSON.`
+        prompt += `Please return only the modified code suggestions as JSON with this structure, and provide the description with indonesian language:
+        {
+        "suggestions": [
+            {
+            "snippet": "Brief code preview",
+            "description": "What this solution does", //ALWAYS IMPLEMENT IN INDONESIAN LANGUAGE AND 12 WORDS MAXIMUM
+            "modifications": {
+                "remove": [5, 6, 7],
+                "change": {
+                "2": "const x = 10;",
+                "8": "return result;"
+                },
+                "add": {
+                "3": "const y = 20;",
+                "9": "console.log(result);"
+                }
+            }
+            }
+        ]
+        }`;
 
         // Generate response
         const result = await model.generateContent(prompt);
@@ -241,7 +123,7 @@ export async function POST(request) {
                 success: true
             });
         } catch (parseError) {
-            console.error("JSON parsing error:", parseError);
+            // console.error("JSON parsing error:", parseError);
             return Response.json({
                 text: response.text(),
                 error: "Failed to parse JSON response",

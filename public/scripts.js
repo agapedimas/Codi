@@ -3,6 +3,8 @@ Image_Profile.onclick = function()
     Components.PopOver.Open(PopOver_Profile, this);
 }
 
+window.MyNameSpace = null
+
 Select_Theme.value = localStorage.getItem("theme") || "system";
 Select_Theme.onchange = function()
 {
@@ -218,18 +220,6 @@ function initializeRecognition(language) {
             if (pauseTimeout) {
                 clearTimeout(pauseTimeout);
             }
-            
-            pauseTimeout = setTimeout(() => {
-                if (isRecording && !isPaused) {
-                    isPaused = true;
-                    try {
-                        StopRecognition()
-                    } catch(e) {
-                        console.error("Error stopping recognition for pause:", e);
-                    }
-            
-                } 
-            }, 5000); // stop jika 5 detik ybs. tidak ngomong
         } else {
             transcript = fullTranscript + currentTranscript;
             CodiAssistant_Update("listening", "", transcript);
@@ -298,43 +288,45 @@ async function StopRecognition(){
         clearTimeout(pauseTimeout);
     }
     
-    console.log(transcript) // Check transcription result
+    // console.log(transcript) // Check transcription result
     if (transcript){
+        let tempTranscript = transcript
         sendToGemini()
         .then(result => {
-            console.log(result);
-            tempGeminiResult = result
-            
-            const snippet = result.snippet
-            const description = result.desc
-
-            let resultList = []
-            const code = document.querySelector('.root .main')?.textContent || ''
-
-            if (snippet){
-                for (let i = 0; i < snippet.length; i++) {
-                    let text = snippet[i]
-                    let changes = result[i]
-                    let done = description[i]
-    
-                    function modifyCode(changes){
-                        // yet to implement (next commit)
-                        return ""
-                    }
-                    let newJson = {
+            if(result){
+                console.log(result);
+                tempGeminiResult = result
+                const hasil = result.suggestions
+                
+                let resultList = []
+                
+                if (hasil){
+                    for (let i = 0; i < hasil.length; i++) {
+                        let text = hasil[i].snippet
+                        let done = hasil[i].description
+                        let modifications = hasil[i].modifications
+                        
+                        function modifyCode(){
+                            // try to implement (next commit)
+                            if (window.modifyCodeInEditor) {
+                                console.log("modifying")
+                                return window.modifyCodeInEditor(modifications);
+                            }
+                        }
+                        let newJson = {
                         text: text,
                         action: modifyCode,
                         done: done
                     }
-                    console.log(newJson)
                     resultList.push(newJson)
                 }
-                CodiAssistant_Update("choose", "", transcript, resultList)
-            } else{
-                CodiAssistant_Update("done", "Permintaan tidak dapat diproses", "Perintah tidak dapat dimengerti.")
-            }
+                CodiAssistant_Update("choose", "", tempTranscript, resultList)
+                } else{
+                    CodiAssistant_Update("done", "Gagal Memproses", "Perintah tidak dapat dimengerti.")
+                }
+            } else {CodiAssistant_Update("done", "Gagal Memproses", "Perintah tidak dapat dimengerti.")}
         })
-
+        
     } else{
         CodiAssistant_Update("start")
     }
