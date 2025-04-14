@@ -23,6 +23,77 @@ const features =
     }
 ]
 
+const howItWorks = [
+    {
+        name: "Kalibrasi",
+        desc: "Sesuaikan sistem dengan gerakan mata atau suara Anda dalam waktu kurang dari satu menit.",
+        icon: "\ueef9"
+    },
+    {
+        name: "Belajar",
+        desc: "Ikuti kurikulum yang dipersonalisasi sesuai dengan kebutuhan dan level pemahaman Anda.",
+        icon: "\ued7e"
+    },
+    {
+        name: "Berkreasi",
+        desc: "Mulai membuat proyek Anda sendiri dengan alat yang inklusif dan mendukung.",
+        icon: "\uf018"
+    }
+]
+
+const testimonials = [
+    {
+        name: "Andi Setiawan",
+        job: "Pengembang Web",
+        review: "Codi telah mengubah hidup saya. Saya tidak pernah membayangkan bisa menjadi programmer dengan kondisi fisik saya, tapi sekarang saya bisa membuat website sendiri."
+    },
+    {
+        name: "Dina Pratiwi",
+        job: "Mahasiswa Teknik",
+        review: "Dengan kontrol suara di Codi, saya bisa mengerjakan tugas pemrograman saya tanpa bantuan orang lain. Ini sangat membebaskan!"
+    },
+    {
+        name: "Budi Santoso",
+        job: "Guru TIK",
+        review: "Codi membuka peluang baru bagi siswa saya yang memiliki keterbatasan motorik. Mereka sekarang bisa berpartisipasi penuh dalam kelas pemrograman."
+    },
+    {
+      name: "Siti Khadijah",
+      job: "Ibu Rumah Tangga",
+      review: "Awalnya saya cuma bantu anak belajar, tapi sekarang saya sendiri jadi tertarik coding. Codi bikin semuanya terasa mungkin."
+    },
+    {
+      name: "Rian Maulana",
+      job: "Pelajar SMA",
+      review: "Saya pernah patah semangat karena susah ngetik. Tapi Codi bikin saya semangat lagi buat belajar Java dan Python!"
+    },
+    {
+      name: "Lukas Jonathan",
+      job: "Desainer Grafis",
+      review: "Saya bukan programmer, tapi dengan Codi saya bisa bikin prototipe web tanpa ribet. Apalagi bisa dikontrol pakai suara, praktis banget."
+    },
+    {
+      name: "Mega Puspita",
+      job: "Pengusaha Online",
+      review: "Saya pakai Codi buat belajar bikin toko online sendiri. Sekarang ga perlu bayar mahal ke developer. Mandiri itu enak!"
+    },
+    {
+      name: "Hendra Wijaya",
+      job: "Mahasiswa Difabel Netra",
+      review: "Codi sangat membantu karena antarmukanya bisa dikontrol suara. Saya bisa belajar tanpa harus selalu tergantung pembaca layar."
+    },
+    {
+      name: "Yohana Fransisca",
+      job: "Pustakawan",
+      review: "Codi adalah jembatan buat saya yang gaptek. Sekarang saya bisa bikin blog pribadi dengan coding yang saya pelajari sendiri."
+    },
+    {
+      name: "Taufik Rahman",
+      job: "Freelancer",
+      review: "Setelah kecelakaan saya sempat ga yakin bisa kerja lagi. Tapi Codi ngajarin saya cara baru buat tetap produktif lewat programming."
+    }
+]
+
 const element = (
 <Fragment>
     <header id="Header" className="titlebar">
@@ -33,9 +104,13 @@ const element = (
         <nav>
             <a ad-name="features">Fitur</a>
             <a ad-name="how-it-works">Cara Kerja</a>
-            <a>Testimoni</a>
-            <a>Harga</a>
+            <a ad-name="testimonials">Testimoni</a>
+            <a ad-name="pricing">Harga</a>
             <a ad-name="start-now">Mulai Gratis</a>
+            <button ad-goto="signin" className="accent">
+                <span>Masuk</span> 
+                <span className="icon">&#xf9f6;</span>
+            </button>
         </nav>
     </header>
     <section className="root">
@@ -91,14 +166,51 @@ const element = (
                     </div>
                 </div>
             </section>
-
             
             <section id="how-it-works"> 
                 <h3>Cara Kerja</h3>
                 <div className="text">Proses sederhana untuk memulai perjalanan coding Anda</div>
+
+                <div id="Grid_HowItWorks">
+                    <div className="container">
+                        {
+                            howItWorks.map(step => (
+                                <div className="step" key={Math.random()}>
+                                    <div className="name">{step.name}</div>
+                                    <div className="desc">{step.desc}</div>
+                                    <div className="icon">{step.icon}</div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </section>
+            
+            <section id="testimonials"> 
+                <h3>Testimoni</h3>
+                <div className="text">Apa kata mereka tentang Codi</div>
+
+                <div id="Grid_Testimonials">
+                    <div className="container">
+                        {
+                            testimonials.map(testimony => (
+                                <div key={Math.random()} className="testimony">
+                                    <div className="review">{testimony.review}</div>
+                                    <div className="name">{testimony.name}</div>
+                                    <div className="job">{testimony.job}</div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
             </section>
 
-            
+            <section id="pricing"> 
+                <h3>Paket Harga</h3>
+                <div className="text">Pilih paket yang sesuai dengan kebutuhan Anda</div>
+
+            </section>
+
             <section id="start-now"> 
                 <div className="title">Siap mencoba Codi?</div>
                 <div className="text">Mulai perjalanan coding Anda sekarang.</div>

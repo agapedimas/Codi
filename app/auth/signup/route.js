@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { createSession } from "@/lib/session";
 import bcrypt from "bcryptjs";
 
 export async function POST(req) 
@@ -8,6 +9,8 @@ export async function POST(req)
     {
         const body = await req.json();
         const { email, fullname, password } = body;
+
+        const id = (Date.now() * 10).toString(36);
 
         if (!email || !fullname || !password)
             return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
@@ -19,11 +22,13 @@ export async function POST(req)
         const hashedPassword = await bcrypt.hash(password, 10);
 
         await db.query("INSERT INTO accounts (id, email, fullname, password) VALUES (?, ?, ?, ?)", [
-            (Date.now() * 10).toString(36),
+            id,
             email,
             fullname,
             hashedPassword,
         ]);
+        
+        await createSession(id);
 
         return NextResponse.json({ message: "User berhasil didaftarkan" });
     } 

@@ -85,7 +85,7 @@ Button_SignIn.onclick = SignIn;
         if (e.key == "Enter")
         {
             if (this == Input_Email)
-                Input_Fullname.focus();
+                Input_Password.focus();
             else if (this == Input_Password)
                 Button_SignIn.click();
         }
@@ -131,7 +131,7 @@ Button_SignIn.onclick = SignIn;
             }
             else if (data.status >= 500 && data.status < 600)
             {
-                $(".panel .inputs #Text_ErrorSignIn").html("Server sedang bermasalah. Coba lagig nanti.");
+                $(".panel .inputs #Text_ErrorSignIn").html("Server sedang bermasalah. Coba lagi nanti.");
             }
             else
             {
