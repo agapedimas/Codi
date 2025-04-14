@@ -406,3 +406,92 @@ header.titlebar.scroll:after
         }
     }
 }
+
+
+#pricing
+{
+    #Grid_Pricing
+    {
+        .container
+        {
+            display: grid;
+            grid-auto-flow: column;
+            gap: 20px;
+            overflow-x: auto;
+            margin: 3em -50vw 0;
+            padding: 0 50vw;
+            scrollbar-width: none;
+    
+            .pricing
+            {
+                display: grid;
+                position: relative;
+                grid-auto-columns: 270px;
+                grid-auto-rows: max-content max-content max-content auto max-content;
+                justify-content: center;
+                background: var(--gray-7);
+                padding: 1.25em 1.5em;
+                border-radius: 20px;
+    
+                .name
+                {
+                    font-size: 1.75em;
+                    font-family: var(--font-bold);
+                }
+    
+                .desc
+                {
+                    font-size: 1.25em;
+                }
+
+                .price
+                {
+                    margin: 1em 0;
+                    font-size: 2em;
+                    font-family: var(--font-bold);
+                }
+                .price::before
+                {
+                    content: "Rp ";
+                }
+                .price::after
+                {
+                    content: " / bulan";
+                    font-size: 0.65em;
+                    color: var(--foreground-description);
+                }
+
+                .features
+                {
+                    display: grid;
+                    grid-auto-rows: max-content;
+                    gap: 0.5em;
+                    margin: 0 0 2em;
+
+                    div 
+                    {
+                        font-size: 1.15em;
+                        display: grid;
+                        grid-auto-flow: column;
+                        grid-auto-columns: max-content;
+                        gap: 1ch;
+                    }
+
+                    div::before
+                    {
+                        content: "\ef32";
+                        font-family: var(--font-icon);
+                    }
+                }
+
+                button
+                {
+                    padding: .5em 1em;
+                    font-size: 1.2em;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

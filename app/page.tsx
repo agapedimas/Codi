@@ -94,6 +94,44 @@ const testimonials = [
     }
 ]
 
+const pricing = [
+    {
+        name: "Basic",
+        desc: "Untuk pemula",
+        price: "0",
+        features: [
+            "Akses ke 5 modul dasar",
+            "Kontrol dasar mata dan suara",
+            "Forum komunitas"
+        ],
+        cta: "Daftar Sekarang"
+    },
+    {
+        name: "Pro",
+        desc: "Untuk individu serius",
+        price: "199k",
+        features: [
+            "Akses ke semua modul dasar",
+            "Kontrol premium mata dan suara",
+            "Sesi mentoring bulanan",,
+            "Proyek portofolio"
+        ],
+        cta: "Berlangganan Sekarang"
+    },
+    {
+        name: "Enterprise",
+        desc: "Untuk institusi",
+        price: "???",
+        features: [
+            "Semua fitur Pro",
+            "Dashboard admin",
+            "Akses API",
+            "Dukungan 24/7"
+        ],
+        cta: "Hubungi Kami"
+    }
+]
+
 const element = (
 <Fragment>
     <header id="Header" className="titlebar">
@@ -115,7 +153,6 @@ const element = (
     </header>
     <section className="root">
         <div className="main">
-
             <section id="welcome"> 
                 <div className="title">
                     <span>Belajar Pemrograman Tanpa</span>
@@ -208,7 +245,28 @@ const element = (
             <section id="pricing"> 
                 <h3>Paket Harga</h3>
                 <div className="text">Pilih paket yang sesuai dengan kebutuhan Anda</div>
-
+                
+                <div id="Grid_Pricing">
+                    <div className="container">
+                        {
+                            pricing.map(data => (
+                                <div key={Math.random()} className="pricing">
+                                    <div className="name">{data.name}</div>
+                                    <div className="desc">{data.desc}</div>
+                                    <div className="price">{data.price}</div>
+                                    <div className="features">
+                                        {
+                                            data.features.map(feature => (
+                                                <div>{feature}</div>
+                                            ))
+                                        }
+                                    </div>
+                                    <button className="cta accent">{data.cta}</button>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
             </section>
 
             <section id="start-now"> 
