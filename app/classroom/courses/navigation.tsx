@@ -38,25 +38,37 @@ export default function Menu_Courses() {
     <>
       <div className="separator">Kursus Saya</div>
       {courses.length === 0 ? (
-        <div className="text-sm text-gray-500 px-2">Anda belum mengambil Kursus</div>
+        <div className="text-sm text-gray-500 px-2">
+          Anda belum mengambil Kursus
+        </div>
       ) : (
         courses.map((course) => (
           <div key={course.id}>
-            <a className="dropdown expanded" 
-            ad-goto={`/classroom/courses/${course.id}`}
-            suppressHydrationWarning>
+            <a
+              className="dropdown expanded"
+              ad-goto={`/classroom/courses/${course.id}`}
+              suppressHydrationWarning
+            >
               <span>{course.nama}</span>
             </a>
-            {course.modules.map((modul) => (
-              <a
-                key={modul.id}
-                className="innerdropdown"
-                ad-goto={`/classroom/courses/${course.id}/${modul.id}`}
-                suppressHydrationWarning
-              >
-                <span>{modul.nama}</span>
-              </a>
-            ))}
+            {course.modules.map((modul) => {
+              // Custom path for course 1 module 2
+              const path =
+                course.id === 1 && modul.id === 2
+                  ? "/classroom/courses/java/quiz"
+                  : `/classroom/courses/${course.id}/${modul.id}`;
+
+              return (
+                <a
+                  key={modul.id}
+                  className="innerdropdown"
+                  ad-goto={path}
+                  suppressHydrationWarning
+                >
+                  <span>{modul.nama}</span>
+                </a>
+              );
+            })}
           </div>
         ))
       )}
