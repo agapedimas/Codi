@@ -1,5 +1,5 @@
 const element = (
-    <div className="separator">Sertifikat Saya</div>
+    <div className="separator"></div>
 );
 
 export default function Menu_Certificates() {

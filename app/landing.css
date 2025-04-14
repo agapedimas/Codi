@@ -91,6 +91,8 @@ header.titlebar.scroll:after
 
 .root > .main
 {
+    background: linear-gradient(161deg, #000b16, #00376f);
+    background-attachment: local;
     scroll-behavior: smooth;
 
     section
@@ -161,7 +163,7 @@ header.titlebar.scroll:after
         margin: 2em 0 0;
         gap: 3em;
         border-radius: 20px;
-        background: var(--gray-6);
+        background: var(--overlay-6);
 
         .navigation
         {
@@ -299,7 +301,7 @@ header.titlebar.scroll:after
                 grid-auto-rows: max-content auto max-content;
                 gap: 1em;
                 justify-content: center;
-                background: var(--gray-7);
+                background: var(--overlay-7);
                 padding: 1.25em 1.5em;
                 border-radius: 20px;
                 counter-increment: counter;
@@ -335,7 +337,7 @@ header.titlebar.scroll:after
                 height: auto;
                 aspect-ratio: 1;
                 background: var(--foreground-description);
-                color: var(--gray-7);
+                color: var(--overlay-7);
                 border-radius: 100%;
                 font-family: var(--font-bold);
                 font-size: 1.15em;
@@ -365,7 +367,7 @@ header.titlebar.scroll:after
                 position: relative;
                 grid-auto-columns: 270px;
                 grid-auto-rows: auto max-content max-content;
-                background: var(--gray-7);
+                background: var(--overlay-7);
                 padding: 1.25em 1.5em;
                 border-radius: 20px;
 
@@ -429,7 +431,7 @@ header.titlebar.scroll:after
                 grid-auto-columns: 270px;
                 grid-auto-rows: max-content max-content max-content auto max-content;
                 justify-content: center;
-                background: var(--gray-7);
+                background: var(--overlay-7);
                 padding: 1.25em 1.5em;
                 border-radius: 20px;
     
