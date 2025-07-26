@@ -50,5 +50,3 @@ Lalu jalankan servernya
 ```bash
 npm run dev
 ```
-
-Open [https://agapedimas.com/r/codi](http://agapedimas.com/r/codi) with your browser to see the result.
